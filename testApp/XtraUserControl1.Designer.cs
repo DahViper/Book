@@ -1,4 +1,6 @@
-﻿namespace testApp
+﻿using System.Windows.Forms;
+
+namespace testApp
 {
     partial class XtraUserControl1
     {
@@ -120,12 +122,12 @@
             // 
             this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl.Location = new System.Drawing.Point(0, 252);
+            this.gridControl.Location = new System.Drawing.Point(0, 212);
             this.gridControl.MainView = this.gridView;
             this.gridControl.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl.MenuManager = this.ribbonControl;
             this.gridControl.Name = "gridControl";
-            this.gridControl.Size = new System.Drawing.Size(922, 231);
+            this.gridControl.Size = new System.Drawing.Size(150, 0);
             this.gridControl.TabIndex = 2;
             this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -165,7 +167,7 @@
             this.ribbonPage2});
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonControl.Size = new System.Drawing.Size(922, 193);
+            this.ribbonControl.Size = new System.Drawing.Size(150, 153);
             this.ribbonControl.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
             // bbiUpdate
@@ -321,9 +323,9 @@
             this.panelControl1.Controls.Add(this.textID);
             this.panelControl1.Controls.Add(this.ddAuthor1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 483);
+            this.panelControl1.Location = new System.Drawing.Point(0, -104);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(922, 254);
+            this.panelControl1.Size = new System.Drawing.Size(150, 254);
             this.panelControl1.TabIndex = 6;
             // 
             // comboVat2
@@ -696,9 +698,9 @@
             this.panelControl2.Controls.Add(this.labelControl21);
             this.panelControl2.Controls.Add(this.authorSearch);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl2.Location = new System.Drawing.Point(0, 193);
+            this.panelControl2.Location = new System.Drawing.Point(0, 153);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(922, 59);
+            this.panelControl2.Size = new System.Drawing.Size(150, 59);
             this.panelControl2.TabIndex = 8;
             this.panelControl2.Visible = false;
             // 
@@ -763,17 +765,16 @@
             this.authorSearch.TabIndex = 7;
             this.authorSearch.EditValueChanged += new System.EventHandler(this.authorSearch_EditValueChanged);
             // 
-            // Form1
+            // XtraUserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 737);
             this.Controls.Add(this.gridControl);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.ribbonControl);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "XtraUserControl1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();

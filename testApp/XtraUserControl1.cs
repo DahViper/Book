@@ -20,7 +20,7 @@ namespace testApp
         public XtraUserControl1()
         {
             InitializeComponent();
-
+            this.Dock = DockStyle.Fill;
 
         }
 
@@ -262,8 +262,8 @@ namespace testApp
                 ddAuthor1.Properties.Columns["AuthorID"]
                     .Visible = false;
 
-                authorSearch.Properties.Columns["AuthorID"]
-                    .Visible = false;
+                //authorSearch.Properties.Columns["AuthorID"]
+                //    .Visible = false;
 
 
             }
@@ -346,5 +346,20 @@ namespace testApp
         {
             panelControl2.Visible = true;
         }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+
+            // Manually force everything to fill
+            if (gridControl != null)
+            {
+                gridControl.Width = this.Width;
+                gridControl.Height = this.Height - panelControl1.Height - panelControl2.Height;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"UserControl size changed: {this.Size}");
+        }
+
     }
 }

@@ -136,3 +136,4 @@ C:\Users\dell-hts\source\repos\testApp\testApp\bin\Debug\tr\Microsoft.Data.SqlCl
 C:\Users\dell-hts\source\repos\testApp\testApp\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dell-hts\source\repos\testApp\testApp\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
 C:\Users\dell-hts\source\repos\testApp\testApp\obj\Debug\testApp.XtraForm1.resources
+C:\Users\dell-hts\source\repos\testApp\testApp\obj\Debug\testApp.XtraUserControl1.resources
