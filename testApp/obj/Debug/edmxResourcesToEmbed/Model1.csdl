@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="testBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AUTHOR">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BOOKs" Relationship="testBookModel.FK__BOOK__AuthorID__4D94879B" FromRole="AUTHOR" ToRole="BOOK" />
+    <NavigationProperty Name="BOOKs1" Relationship="testBookModel.BOOK_AUTHOR" FromRole="AUTHOR" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="BOOK">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AuthorID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="Publisher" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PublishYear" Type="Int32" />
+    <Property Name="StockQuantity" Type="Int32" />
+    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AUTHOR" Relationship="testBookModel.FK__BOOK__AuthorID__4D94879B" FromRole="BOOK" ToRole="AUTHOR" />
+    <NavigationProperty Name="CATEGORY" Relationship="testBookModel.FK__BOOK__CategoryID__4E88ABD4" FromRole="BOOK" ToRole="CATEGORY" />
+    <NavigationProperty Name="AUTHORs" Relationship="testBookModel.BOOK_AUTHOR" FromRole="BOOK" ToRole="AUTHOR" />
+    <NavigationProperty Name="CATEGORies" Relationship="testBookModel.BOOK_CATEGORY" FromRole="BOOK" ToRole="CATEGORY" />
+    <Property Name="CostPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VatInPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="WholesalePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="VatOutPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="RetailPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="CATEGORY">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BOOKs" Relationship="testBookModel.FK__BOOK__CategoryID__4E88ABD4" FromRole="CATEGORY" ToRole="BOOK" />
+    <NavigationProperty Name="BOOKs1" Relationship="testBookModel.BOOK_CATEGORY" FromRole="CATEGORY" ToRole="BOOK" />
+  </EntityType>
+  <EntityContainer Name="testBookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AUTHORs" EntityType="Self.AUTHOR" />
+    <EntitySet Name="BOOKs" EntityType="Self.BOOK" />
+    <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+    <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="testBookModel.FK__BOOK__AuthorID__4D94879B">
+      <End Role="AUTHOR" EntitySet="AUTHORs" />
+      <End Role="BOOK" EntitySet="BOOKs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BOOK__CategoryID__4E88ABD4" Association="testBookModel.FK__BOOK__CategoryID__4E88ABD4">
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+      <End Role="BOOK" EntitySet="BOOKs" />
+    </AssociationSet>
+    <AssociationSet Name="BOOK_AUTHOR" Association="testBookModel.BOOK_AUTHOR">
+      <End Role="AUTHOR" EntitySet="AUTHORs" />
+      <End Role="BOOK" EntitySet="BOOKs" />
+    </AssociationSet>
+    <AssociationSet Name="BOOK_CATEGORY" Association="testBookModel.BOOK_CATEGORY">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK__BOOK__AuthorID__4D94879B">
+    <End Type="testBookModel.AUTHOR" Role="AUTHOR" Multiplicity="0..1" />
+    <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTHOR">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="BOOK">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BOOK__CategoryID__4E88ABD4">
+    <End Type="testBookModel.CATEGORY" Role="CATEGORY" Multiplicity="0..1" />
+    <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="BOOK">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BOOK_AUTHOR">
+    <End Type="testBookModel.AUTHOR" Role="AUTHOR" Multiplicity="*" />
+    <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="*" />
+  </Association>
+  <Association Name="BOOK_CATEGORY">
+    <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="*" />
+    <End Type="testBookModel.CATEGORY" Role="CATEGORY" Multiplicity="*" />
+  </Association>
+</Schema>
