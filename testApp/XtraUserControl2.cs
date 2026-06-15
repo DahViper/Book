@@ -1,5 +1,7 @@
 ﻿using DevExpress.XtraBars;
+using DevExpress.XtraBars.Customization;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,19 +15,59 @@ using System.Windows.Forms;
 
 namespace testApp
 {
+    
     public partial class XtraUserControl2 : DevExpress.XtraEditors.XtraUserControl
     {
+        public class ExportItem
+        {
+            public int BookID { get; set; }
+
+            public string ISBN { get; set; }
+
+            public string Title { get; set; }
+
+            public int Quantity { get; set; }
+
+            public decimal UnitPrice { get; set; }
+
+            public decimal VATPercent { get; set; }
+
+            public decimal VATPrice
+            {
+                get
+                {
+                    return VATPercent/100 * UnitPrice;
+                }
+            }
+
+
+            public decimal LineTotal
+            {
+                get
+                {
+                    return Quantity * UnitPrice;
+                }
+            }
+        }
+
+        private List<BOOK> _books;
+        private BindingList<ExportItem> exportItems = new BindingList<ExportItem>();
         public XtraUserControl2()
         {
             InitializeComponent();
 
-            BindingList<Customer> dataSource = GetDataSource();
-            gridControl.DataSource = dataSource;
-            bsiRecordsCount.Caption = "RECORDS : " + dataSource.Count;
+            //BindingList<Customer> dataSource = GetDataSource();
+            //gridControl.DataSource = dataSource;
+            //bsiRecordsCount.Caption = "RECORDS : " + dataSource.Count;
+            gridControl.DataSource = exportItems;
         }
-        void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
+
+        private void Export_Load(object sender, EventArgs e)
         {
-            gridControl.ShowRibbonPrintPreview();
+            onLoad();
+            onNew();
+            //LoadCategories2();
+            //LoadAuthor();
         }
         public BindingList<Customer> GetDataSource()
         {
@@ -66,5 +108,88 @@ namespace testApp
             public string Phone { get; set; }
         }
 
+        private void onLoad()
+        {
+            using (testBookEntities db =
+                   new testBookEntities())
+            {
+                _books = db.BOOKs
+            .Include("EXPORT_RECEIPT_DETAIL")
+            .ToList();
+            }
+        }
+
+        private void onNew()
+        {
+            using (testBookEntities db =
+                   new testBookEntities())
+            {
+                var books = db.BOOKs.Select(b=> new
+                {
+                    b.BookID,
+                    b.Title,
+                }).ToList();
+                searchLookUpEdit1.Properties.DataSource = books;
+                searchLookUpEdit1.Properties.DisplayMember = "Title";
+                searchLookUpEdit1.Properties.ValueMember = "BookId";
+                searchLookUpEdit1.Properties.PopulateViewColumns();
+            }
+
+        }
+
+        private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+            object value = searchLookUpEdit1.Properties.View.GetFocusedRowCellValue("BookID");
+
+            if (value == null) return;
+
+            int bookId = Convert.ToInt32(value);
+            BOOK selected = _books.FirstOrDefault(b => b.BookID == bookId);
+            if (selected != null)
+            {
+                textEdit9.EditValue = selected.BookID;
+                textEdit10.Text = selected.ISBN;
+                spinEdit1.Properties.MaxValue = Convert.ToInt32(selected.StockQuantity);
+            }
+        }
+
+        private void spinEdit1_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
+        {
+            DevExpress.XtraEditors.SpinEdit editor = sender as DevExpress.XtraEditors.SpinEdit;
+            if (Convert.ToDecimal(e.NewValue) > editor.Properties.MaxValue)
+            {
+                //e.Cancel = true;
+                this.BeginInvoke(new MethodInvoker(MyMethod));
+            }
+        }
+        public void MyMethod()
+        {
+            spinEdit1.EditValue = spinEdit1.Properties.MaxValue;
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            object value = searchLookUpEdit1.Properties.View.GetFocusedRowCellValue("BookID");
+
+            if (value == null) return;
+
+            int bookId = Convert.ToInt32(value);
+            BOOK selected = _books.FirstOrDefault(b => b.BookID == bookId);
+            if (selected != null)
+            {
+                exportItems.Add(new ExportItem
+                {
+                    BookID = selected.BookID,
+                    ISBN = selected.ISBN,
+                    Title = selected.Title,
+                    Quantity = Convert.ToInt32(spinEdit1.EditValue),
+                    UnitPrice = selected.RetailPrice,
+                    VATPercent = selected.VatOutPercent
+               
+                });
+            }
+                
+        }
     }
+    
 }
