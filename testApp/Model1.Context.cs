@@ -28,5 +28,9 @@ namespace testApp
         public virtual DbSet<AUTHOR> AUTHORs { get; set; }
         public virtual DbSet<BOOK> BOOKs { get; set; }
         public virtual DbSet<CATEGORY> CATEGORies { get; set; }
+        public virtual DbSet<EXPORT_RECEIPT> EXPORT_RECEIPT { get; set; }
+        public virtual DbSet<EXPORT_RECEIPT_DETAIL> EXPORT_RECEIPT_DETAIL { get; set; }
+        public virtual DbSet<IMPORT_RECEIPT> IMPORT_RECEIPT { get; set; }
+        public virtual DbSet<IMPORT_RECEIPT_DETAIL> IMPORT_RECEIPT_DETAIL { get; set; }
     }
 }

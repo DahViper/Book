@@ -19,6 +19,8 @@ namespace testApp
         {
             this.AUTHORs = new HashSet<AUTHOR>();
             this.CATEGORies = new HashSet<CATEGORY>();
+            this.EXPORT_RECEIPT_DETAIL = new HashSet<EXPORT_RECEIPT_DETAIL>();
+            this.IMPORT_RECEIPT_DETAIL = new HashSet<IMPORT_RECEIPT_DETAIL>();
         }
     
         public int BookID { get; set; }
@@ -43,5 +45,9 @@ namespace testApp
         public virtual ICollection<AUTHOR> AUTHORs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CATEGORY> CATEGORies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EXPORT_RECEIPT_DETAIL> EXPORT_RECEIPT_DETAIL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMPORT_RECEIPT_DETAIL> IMPORT_RECEIPT_DETAIL { get; set; }
     }
 }

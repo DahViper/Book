@@ -119,6 +119,7 @@ namespace testApp
 
                     }).ToList();
             }
+            gridView.Columns["BookID"].Width = 10;
 
         }
 

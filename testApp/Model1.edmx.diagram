@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="32fac621f6d74156822c1f10f04ced30" Name="Diagram1">
+      <Diagram DiagramId="32fac621f6d74156822c1f10f04ced30" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="testBookModel.AUTHOR" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testBookModel.BOOK" Width="1.625" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testBookModel.CATEGORY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -12,6 +12,14 @@
         <AssociationConnector Association="testBookModel.FK__BOOK__CategoryID__4E88ABD4" />
         <AssociationConnector Association="testBookModel.BOOK_AUTHOR" />
         <AssociationConnector Association="testBookModel.BOOK_CATEGORY" />
+        <EntityTypeShape EntityType="testBookModel.EXPORT_RECEIPT" Width="1.5" PointX="2.875" PointY="12.375" />
+        <EntityTypeShape EntityType="testBookModel.EXPORT_RECEIPT_DETAIL" Width="1.5" PointX="5.125" PointY="4.625" />
+        <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT" Width="1.5" PointX="8.75" PointY="7.875" />
+        <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT_DETAIL" Width="1.5" PointX="7.125" PointY="0.75" />
+        <AssociationConnector Association="testBookModel.FK__EXPORT_RE__BookI__17036CC0" />
+        <AssociationConnector Association="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" />
+        <AssociationConnector Association="testBookModel.FK__EXPORT_RE__Expor__160F4887" />
+        <AssociationConnector Association="testBookModel.FK__IMPORT_RE__Impor__04E4BC85" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

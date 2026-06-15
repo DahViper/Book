@@ -65,5 +65,6 @@ namespace testApp
             public string ZipCode { get; set; }
             public string Phone { get; set; }
         }
+
     }
 }

@@ -55,6 +55,58 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="EXPORT_RECEIPT">
+          <Key>
+            <PropertyRef Name="ExportID" />
+          </Key>
+          <Property Name="ExportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExportCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="ExportDate" Type="datetime" />
+          <Property Name="ExporType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="200" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="TotalQuantity" Type="int" />
+          <Property Name="TotalVATAmount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Shippingfee" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EXPORT_RECEIPT_DETAIL">
+          <Key>
+            <PropertyRef Name="ExportDetailID" />
+          </Key>
+          <Property Name="ExportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExportID" Type="int" />
+          <Property Name="BookID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="VATPercent" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="LineTotal" Type="decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="IMPORT_RECEIPT">
+          <Key>
+            <PropertyRef Name="ImportID" />
+          </Key>
+          <Property Name="ImportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImportCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="ImportDate" Type="datetime" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="TotalQuantity" Type="int" />
+          <Property Name="TotalAmount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="IMPORT_RECEIPT_DETAIL">
+          <Key>
+            <PropertyRef Name="ImportDetailID" />
+          </Key>
+          <Property Name="ImportID" Type="int" />
+          <Property Name="BookID" Type="int" />
+          <Property Name="ImportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Costprice" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="LineTotal" Type="decimal" Precision="19" Scale="4" />
+        </EntityType>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
           <End Role="AUTHOR" Type="Self.AUTHOR" Multiplicity="0..1" />
           <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
@@ -127,12 +179,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__EXPORT_RE__BookI__17036CC0">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
+          <End Role="EXPORT_RECEIPT_DETAIL" Type="Self.EXPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="EXPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EXPORT_RE__Expor__160F4887">
+          <End Role="EXPORT_RECEIPT" Type="Self.EXPORT_RECEIPT" Multiplicity="0..1" />
+          <End Role="EXPORT_RECEIPT_DETAIL" Type="Self.EXPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXPORT_RECEIPT">
+              <PropertyRef Name="ExportID" />
+            </Principal>
+            <Dependent Role="EXPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="ExportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMPORT_RE__BookI__05D8E0BE">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
+          <End Role="IMPORT_RECEIPT_DETAIL" Type="Self.IMPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="IMPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMPORT_RE__Impor__04E4BC85">
+          <End Role="IMPORT_RECEIPT" Type="Self.IMPORT_RECEIPT" Multiplicity="0..1" />
+          <End Role="IMPORT_RECEIPT_DETAIL" Type="Self.IMPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPORT_RECEIPT">
+              <PropertyRef Name="ImportID" />
+            </Principal>
+            <Dependent Role="IMPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="ImportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="testBookModelStoreContainer">
           <EntitySet Name="AUTHOR" EntityType="Self.AUTHOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK_AUTHOR" EntityType="Self.BOOK_AUTHOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK_CATEGORY" EntityType="Self.BOOK_CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPORT_RECEIPT" EntityType="Self.EXPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPORT_RECEIPT_DETAIL" EntityType="Self.EXPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMPORT_RECEIPT" EntityType="Self.IMPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMPORT_RECEIPT_DETAIL" EntityType="Self.IMPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="Self.FK__BOOK__AuthorID__4D94879B">
             <End Role="AUTHOR" EntitySet="AUTHOR" />
             <End Role="BOOK" EntitySet="BOOK" />
@@ -156,6 +260,22 @@
           <AssociationSet Name="FK__BOOK_CATE__Categ__5DCAEF64" Association="Self.FK__BOOK_CATE__Categ__5DCAEF64">
             <End Role="CATEGORY" EntitySet="CATEGORY" />
             <End Role="BOOK_CATEGORY" EntitySet="BOOK_CATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EXPORT_RE__BookI__17036CC0" Association="Self.FK__EXPORT_RE__BookI__17036CC0">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="EXPORT_RECEIPT_DETAIL" EntitySet="EXPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EXPORT_RE__Expor__160F4887" Association="Self.FK__EXPORT_RE__Expor__160F4887">
+            <End Role="EXPORT_RECEIPT" EntitySet="EXPORT_RECEIPT" />
+            <End Role="EXPORT_RECEIPT_DETAIL" EntitySet="EXPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMPORT_RE__BookI__05D8E0BE" Association="Self.FK__IMPORT_RE__BookI__05D8E0BE">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="Self.FK__IMPORT_RE__Impor__04E4BC85">
+            <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
+            <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -194,6 +314,8 @@
           <Property Name="WholesalePrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="VatOutPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="RetailPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="EXPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__EXPORT_RE__BookI__17036CC0" FromRole="BOOK" ToRole="EXPORT_RECEIPT_DETAIL" />
+          <NavigationProperty Name="IMPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" FromRole="BOOK" ToRole="IMPORT_RECEIPT_DETAIL" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -223,6 +345,26 @@
           <AssociationSet Name="BOOK_CATEGORY" Association="testBookModel.BOOK_CATEGORY">
             <End Role="BOOK" EntitySet="BOOKs" />
             <End Role="CATEGORY" EntitySet="CATEGORies" />
+          </AssociationSet>
+          <EntitySet Name="EXPORT_RECEIPT" EntityType="testBookModel.EXPORT_RECEIPT" />
+          <EntitySet Name="EXPORT_RECEIPT_DETAIL" EntityType="testBookModel.EXPORT_RECEIPT_DETAIL" />
+          <EntitySet Name="IMPORT_RECEIPT" EntityType="testBookModel.IMPORT_RECEIPT" />
+          <EntitySet Name="IMPORT_RECEIPT_DETAIL" EntityType="testBookModel.IMPORT_RECEIPT_DETAIL" />
+          <AssociationSet Name="FK__EXPORT_RE__BookI__17036CC0" Association="testBookModel.FK__EXPORT_RE__BookI__17036CC0">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="EXPORT_RECEIPT_DETAIL" EntitySet="EXPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMPORT_RE__BookI__05D8E0BE" Association="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EXPORT_RE__Expor__160F4887" Association="testBookModel.FK__EXPORT_RE__Expor__160F4887">
+            <End Role="EXPORT_RECEIPT" EntitySet="EXPORT_RECEIPT" />
+            <End Role="EXPORT_RECEIPT_DETAIL" EntitySet="EXPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="testBookModel.FK__IMPORT_RE__Impor__04E4BC85">
+            <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
+            <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -256,6 +398,112 @@
         <Association Name="BOOK_CATEGORY">
           <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="*" />
           <End Type="testBookModel.CATEGORY" Role="CATEGORY" Multiplicity="*" />
+        </Association>
+        <EntityType Name="EXPORT_RECEIPT">
+          <Key>
+            <PropertyRef Name="ExportID" />
+          </Key>
+          <Property Name="ExportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExportCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ExportDate" Type="DateTime" Precision="3" />
+          <Property Name="ExporType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalQuantity" Type="Int32" />
+          <Property Name="TotalVATAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Shippingfee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EXPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__EXPORT_RE__Expor__160F4887" FromRole="EXPORT_RECEIPT" ToRole="EXPORT_RECEIPT_DETAIL" />
+        </EntityType>
+        <EntityType Name="EXPORT_RECEIPT_DETAIL">
+          <Key>
+            <PropertyRef Name="ExportDetailID" />
+          </Key>
+          <Property Name="ExportDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExportID" Type="Int32" />
+          <Property Name="BookID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VATPercent" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="LineTotal" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="BOOK" Relationship="testBookModel.FK__EXPORT_RE__BookI__17036CC0" FromRole="EXPORT_RECEIPT_DETAIL" ToRole="BOOK" />
+          <NavigationProperty Name="EXPORT_RECEIPT" Relationship="testBookModel.FK__EXPORT_RE__Expor__160F4887" FromRole="EXPORT_RECEIPT_DETAIL" ToRole="EXPORT_RECEIPT" />
+        </EntityType>
+        <EntityType Name="IMPORT_RECEIPT">
+          <Key>
+            <PropertyRef Name="ImportID" />
+          </Key>
+          <Property Name="ImportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImportCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <Property Name="SupplierName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalQuantity" Type="Int32" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="IMPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__IMPORT_RE__Impor__04E4BC85" FromRole="IMPORT_RECEIPT" ToRole="IMPORT_RECEIPT_DETAIL" />
+        </EntityType>
+        <EntityType Name="IMPORT_RECEIPT_DETAIL">
+          <Key>
+            <PropertyRef Name="ImportDetailID" />
+          </Key>
+          <Property Name="ImportID" Type="Int32" />
+          <Property Name="BookID" Type="Int32" />
+          <Property Name="ImportDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Costprice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LineTotal" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="BOOK" Relationship="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" FromRole="IMPORT_RECEIPT_DETAIL" ToRole="BOOK" />
+          <NavigationProperty Name="IMPORT_RECEIPT" Relationship="testBookModel.FK__IMPORT_RE__Impor__04E4BC85" FromRole="IMPORT_RECEIPT_DETAIL" ToRole="IMPORT_RECEIPT" />
+        </EntityType>
+        <Association Name="FK__EXPORT_RE__BookI__17036CC0">
+          <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="0..1" />
+          <End Type="testBookModel.EXPORT_RECEIPT_DETAIL" Role="EXPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="EXPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMPORT_RE__BookI__05D8E0BE">
+          <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="0..1" />
+          <End Type="testBookModel.IMPORT_RECEIPT_DETAIL" Role="IMPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="IMPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EXPORT_RE__Expor__160F4887">
+          <End Type="testBookModel.EXPORT_RECEIPT" Role="EXPORT_RECEIPT" Multiplicity="0..1" />
+          <End Type="testBookModel.EXPORT_RECEIPT_DETAIL" Role="EXPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXPORT_RECEIPT">
+              <PropertyRef Name="ExportID" />
+            </Principal>
+            <Dependent Role="EXPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="ExportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMPORT_RE__Impor__04E4BC85">
+          <End Type="testBookModel.IMPORT_RECEIPT" Role="IMPORT_RECEIPT" Multiplicity="0..1" />
+          <End Type="testBookModel.IMPORT_RECEIPT_DETAIL" Role="IMPORT_RECEIPT_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IMPORT_RECEIPT">
+              <PropertyRef Name="ImportID" />
+            </Principal>
+            <Dependent Role="IMPORT_RECEIPT_DETAIL">
+              <PropertyRef Name="ImportID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -316,6 +564,62 @@
               <ScalarProperty Name="BookID" ColumnName="BookID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="EXPORT_RECEIPT">
+            <EntityTypeMapping TypeName="testBookModel.EXPORT_RECEIPT">
+              <MappingFragment StoreEntitySet="EXPORT_RECEIPT">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Shippingfee" ColumnName="Shippingfee" />
+                <ScalarProperty Name="TotalVATAmount" ColumnName="TotalVATAmount" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="ExporType" ColumnName="ExporType" />
+                <ScalarProperty Name="ExportDate" ColumnName="ExportDate" />
+                <ScalarProperty Name="ExportCode" ColumnName="ExportCode" />
+                <ScalarProperty Name="ExportID" ColumnName="ExportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXPORT_RECEIPT_DETAIL">
+            <EntityTypeMapping TypeName="testBookModel.EXPORT_RECEIPT_DETAIL">
+              <MappingFragment StoreEntitySet="EXPORT_RECEIPT_DETAIL">
+                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+                <ScalarProperty Name="VATPercent" ColumnName="VATPercent" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="ExportID" ColumnName="ExportID" />
+                <ScalarProperty Name="ExportDetailID" ColumnName="ExportDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPORT_RECEIPT">
+            <EntityTypeMapping TypeName="testBookModel.IMPORT_RECEIPT">
+              <MappingFragment StoreEntitySet="IMPORT_RECEIPT">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="ImportCode" ColumnName="ImportCode" />
+                <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMPORT_RECEIPT_DETAIL">
+            <EntityTypeMapping TypeName="testBookModel.IMPORT_RECEIPT_DETAIL">
+              <MappingFragment StoreEntitySet="IMPORT_RECEIPT_DETAIL">
+                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+                <ScalarProperty Name="Costprice" ColumnName="Costprice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ImportDetailID" ColumnName="ImportDetailID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
