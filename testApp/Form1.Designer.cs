@@ -31,55 +31,28 @@ namespace testApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-            this.document2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.document1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiDelete = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
             this.bbiUpdate = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.bsiRecordsCount = new DevExpress.XtraBars.BarStaticItem();
             this.bbiRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.documentManager1 = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // documentGroup1
-            // 
-            this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
-            this.document2,
-            this.document1});
-            // 
-            // document2
-            // 
-            this.document2.Caption = "document2";
-            this.document2.ControlName = "document2";
-            this.document2.ControlType = typeof(testApp.XtraUserControl2);
-            this.document2.FloatLocation = new System.Drawing.Point(416, 394);
-            this.document2.FloatSize = new System.Drawing.Size(1068, 509);
-            // 
-            // document1
-            // 
-            this.document1.Caption = "document1";
-            this.document1.ControlName = "document1";
-            this.document1.ControlType = typeof(testApp.XtraUserControl1);
-            this.document1.FloatLocation = new System.Drawing.Point(414, 342);
-            this.document1.FloatSize = new System.Drawing.Size(1068, 594);
             // 
             // ribbonPage1
             // 
@@ -96,10 +69,51 @@ namespace testApp
             // 
             this.ribbonPageGroup1.AllowTextClipping = false;
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonPageGroup1.ItemLinks.Add(this.bbiNew);
-            this.ribbonPageGroup1.ItemLinks.Add(this.bbiDelete);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup1.ItemsLayout = DevExpress.XtraBars.Ribbon.RibbonPageGroupItemsLayout.OneRow;
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Inventory";
+            this.barButtonItem1.Id = 21;
+            this.barButtonItem1.ImageOptions.Image = global::testApp.Properties.Resources.listbullets_32x32;
+            this.barButtonItem1.ImageOptions.LargeImage = global::testApp.Properties.Resources.listbullets_32x32;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem4);
+            this.ribbonPageGroup2.ItemsLayout = DevExpress.XtraBars.Ribbon.RibbonPageGroupItemsLayout.OneRow;
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "Import";
+            this.barButtonItem3.Id = 23;
+            this.barButtonItem3.ImageOptions.SvgImage = global::testApp.Properties.Resources.import;
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "Export";
+            this.barButtonItem4.Id = 24;
+            this.barButtonItem4.ImageOptions.SvgImage = global::testApp.Properties.Resources.exportfile;
+            this.barButtonItem4.Name = "barButtonItem4";
+            this.barButtonItem4.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "ribbonPageGroup4";
             // 
             // bbiNew
             // 
@@ -117,22 +131,6 @@ namespace testApp
             this.bbiDelete.ImageOptions.ImageUri.Uri = "Delete";
             this.bbiDelete.Name = "bbiDelete";
             // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem2);
-            this.ribbonPageGroup2.ItemsLayout = DevExpress.XtraBars.Ribbon.RibbonPageGroupItemsLayout.OneRow;
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "List";
-            this.barButtonItem1.Id = 21;
-            this.barButtonItem1.ImageOptions.Image = global::testApp.Properties.Resources.listbullets_32x32;
-            this.barButtonItem1.ImageOptions.LargeImage = global::testApp.Properties.Resources.listbullets_32x32;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
             // barButtonItem2
             // 
             this.barButtonItem2.Caption = "Search";
@@ -140,12 +138,6 @@ namespace testApp
             this.barButtonItem2.ImageOptions.Image = global::testApp.Properties.Resources.addfile_32x32;
             this.barButtonItem2.ImageOptions.LargeImage = global::testApp.Properties.Resources.lookup_reference_32x32;
             this.barButtonItem2.Name = "barButtonItem2";
-            // 
-            // ribbonPageGroup3
-            // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.bbiEdit);
-            this.ribbonPageGroup3.ItemLinks.Add(this.bbiUpdate);
-            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             // 
             // bbiEdit
             // 
@@ -161,11 +153,6 @@ namespace testApp
             this.bbiUpdate.ImageOptions.ImageUri.Uri = "Preview";
             this.bbiUpdate.ImageOptions.SvgImage = global::testApp.Properties.Resources.actions_refresh;
             this.bbiUpdate.Name = "bbiUpdate";
-            // 
-            // ribbonPageGroup4
-            // 
-            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
-            this.ribbonPageGroup4.Text = "ribbonPageGroup4";
             // 
             // bsiRecordsCount
             // 
@@ -194,17 +181,19 @@ namespace testApp
             this.bbiDelete,
             this.bbiRefresh,
             this.barButtonItem1,
-            this.barButtonItem2});
+            this.barButtonItem2,
+            this.barButtonItem3,
+            this.barButtonItem4});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl.Margin = new System.Windows.Forms.Padding(4);
-            this.ribbonControl.MaxItemId = 23;
+            this.ribbonControl.MaxItemId = 25;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.OptionsMenuMinWidth = 385;
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
-            this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.OfficeUniversal;
+            this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonControl.Size = new System.Drawing.Size(1074, 108);
+            this.ribbonControl.Size = new System.Drawing.Size(1074, 193);
             this.ribbonControl.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
             // documentManager1
@@ -214,17 +203,6 @@ namespace testApp
             this.documentManager1.View = this.tabbedView1;
             this.documentManager1.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
             this.tabbedView1});
-            // 
-            // tabbedView1
-            // 
-            this.tabbedView1.DocumentGroups.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup[] {
-            this.documentGroup1});
-            this.tabbedView1.Documents.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseDocument[] {
-            this.document2,
-            this.document1});
-            dockingContainer1.Element = this.documentGroup1;
-            this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer1});
             // 
             // Form1
             // 
@@ -237,9 +215,6 @@ namespace testApp
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl;
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.document1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
@@ -265,8 +240,7 @@ namespace testApp
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl;
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager1;
         private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView1;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document1;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.Document document2;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup documentGroup1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
     }
 }

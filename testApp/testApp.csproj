@@ -260,6 +260,18 @@
     <Compile Include="XtraUserControl2.Designer.cs">
       <DependentUpon>XtraUserControl2.cs</DependentUpon>
     </Compile>
+    <Compile Include="XtraUserControl3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl3.Designer.cs">
+      <DependentUpon>XtraUserControl3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraUserControl4.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl4.Designer.cs">
+      <DependentUpon>XtraUserControl4.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Debug.resx">
       <DependentUpon>Debug.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +297,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl2.resx">
       <DependentUpon>XtraUserControl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl3.resx">
+      <DependentUpon>XtraUserControl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl4.resx">
+      <DependentUpon>XtraUserControl4.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <EntityDeploy Include="Model1.edmx">
@@ -334,6 +352,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\actions_checkcircled.svg" />
+    <None Include="Resources\exportfile.svg" />
+    <None Include="Resources\import.svg" />
+    <None Include="Resources\save.svg" />
+    <None Include="Resources\close.svg" />
     <None Include="Resources\actions_refresh.svg" />
     <None Include="Resources\convert_16x162.png" />
     <None Include="Resources\convert_32x322.png" />

@@ -21,7 +21,7 @@ namespace testApp
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             Form1 myForm = new Form1();
-            myForm.Show();
+            myForm.ShowDialog();
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)

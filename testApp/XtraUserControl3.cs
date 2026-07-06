@@ -1,12 +1,8 @@
-﻿using DevExpress.DocumentServices.ServiceModel.DataContracts;
-using DevExpress.Utils;
+﻿using DevExpress.Utils;
 using DevExpress.XtraBars;
-using DevExpress.XtraBars.Customization;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraLayout.Customization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +10,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace testApp
 {
-    
-    public partial class XtraUserControl2 : DevExpress.XtraEditors.XtraUserControl
+    public partial class XtraUserControl3 : DevExpress.XtraEditors.XtraUserControl
     {
-        public class ExportItem
+        public class ImportItem
         {
             public int BookID { get; set; }
 
@@ -36,7 +28,7 @@ namespace testApp
 
             public int Quantity { get; set; }
 
-            public decimal UnitPrice { get; set; }
+            public decimal CostPrice { get; set; }
 
             public decimal VATPercent { get; set; }
 
@@ -44,7 +36,7 @@ namespace testApp
             {
                 get
                 {
-                    return VATPercent/100 * UnitPrice;
+                    return VATPercent / 100 * CostPrice;
                 }
             }
 
@@ -53,31 +45,31 @@ namespace testApp
             {
                 get
                 {
-                    return Quantity * UnitPrice;
+                    return Quantity * CostPrice;
                 }
             }
         }
 
         private int totalAm;
         private decimal totalMo;
-        private int CurrentExportID;
-        private EXPORT_RECEIPT receipt = new EXPORT_RECEIPT();
+        private int CurrentImportID;
+        private IMPORT_RECEIPT receipt = new IMPORT_RECEIPT();
         private List<BOOK> _books;
-        private List<EXPORT_RECEIPT> _exports;
-        private BindingList<ExportItem> exportItems = new BindingList<ExportItem>();
-        public XtraUserControl2()
+        private List<IMPORT_RECEIPT> _imports;
+        private BindingList<ImportItem> importItems = new BindingList<ImportItem>();
+        public XtraUserControl3()
         {
             InitializeComponent();
 
             //BindingList<Customer> dataSource = GetDataSource();
             //gridControl.DataSource = dataSource;
             //bsiRecordsCount.Caption = "RECORDS : " + dataSource.Count;
-            gridControl.DataSource = exportItems;
+            gridControl.DataSource = importItems;
         }
 
-        private void Export_Load(object sender, EventArgs e)
+        private void Import_Load(object sender, EventArgs e)
         {
-            loadExport();
+            
             ReLoad();
             //LoadCategories2();
             //LoadAuthor();
@@ -89,16 +81,18 @@ namespace testApp
                    new testBookEntities())
             {
                 _books = db.BOOKs
-            .Include("EXPORT_RECEIPT_DETAIL")
+            .Include("IMPORT_RECEIPT_DETAIL")
             .ToList();
             }
-            gridControl.DataSource = exportItems;
-            
+            gridControl.DataSource = importItems;
+
         }
 
         private void ReLoad()
         {
             onLoad();
+            loadImport();
+            bbiDelete.Enabled = false;
         }
 
 
@@ -107,7 +101,7 @@ namespace testApp
             using (testBookEntities db =
                    new testBookEntities())
             {
-                var books = db.BOOKs.Select(b=> new
+                var books = db.BOOKs.Select(b => new
                 {
                     b.BookID,
                     b.Title,
@@ -117,29 +111,31 @@ namespace testApp
                 searchLookUpEdit1.Properties.ValueMember = "BookId";
                 searchLookUpEdit1.Properties.PopulateViewColumns();
             }
-            
+
 
         }
 
-        private void loadExport()
+        private void loadImport()
         {
-            
+
             using (testBookEntities db =
                    new testBookEntities())
             {
-                _exports = db.EXPORT_RECEIPT
-                    .Include("EXPORT_RECEIPT_DETAIL.BOOK")
+                _imports = db.IMPORT_RECEIPT
+                    .Include("IMPORT_RECEIPT_DETAIL.BOOK")
                     .ToList();
-                gridControl1.DataSource = _exports
+                gridControl1.DataSource = _imports
                     .Where(x => x != null)
                     .Select(x => new
                     {
-                        x.ExportID,
-                        x.ExportCode,
+                        x.ImportID,
+                        x.ImportCode,
                         x.TotalAmount,
+                        x.CreatedAt,
+                        x.ImportDate,
+                        
                         x.Status,
-                        x.ExportDate,
-                        x.CreatedAt
+                        x.Note
                     }).ToList();
             }
 
@@ -158,7 +154,7 @@ namespace testApp
             {
                 textEdit9.EditValue = selected.BookID;
                 textEdit10.Text = selected.ISBN;
-                spinEdit1.Properties.MaxValue = Convert.ToInt32(selected.StockQuantity);
+                spinEdit1.Properties.MaxValue = 99;
                 spinEdit1.EditValue = spinEdit1.Properties.MinValue;
             }
         }
@@ -191,30 +187,30 @@ namespace testApp
             BOOK selected = _books.FirstOrDefault(b => b.BookID == bookId);
             if (selected != null && Convert.ToInt32(spinEdit1.EditValue) != 0)
             {
-                var existing = exportItems.FirstOrDefault(x => x.BookID == bookId);
+                var existing = importItems.FirstOrDefault(x => x.BookID == bookId);
 
                 if (existing != null)
                 {
-                    
+
                     existing.Quantity += Convert.ToInt32(spinEdit1.EditValue);
-                    if (existing.Quantity >= selected.StockQuantity) 
+                    if (existing.Quantity >= selected.StockQuantity)
                         existing.Quantity = Convert.ToInt32(selected.StockQuantity);
 
                     gridView.RefreshData();
                 }
                 else
-                    exportItems.Add(new ExportItem
+                    importItems.Add(new ImportItem
                     {
                         BookID = selected.BookID,
                         ISBN = selected.ISBN,
                         Title = selected.Title,
                         Quantity = Convert.ToInt32(spinEdit1.EditValue),
-                        UnitPrice = selected.RetailPrice,
-                        VATPercent = selected.VatOutPercent
+                        CostPrice = selected.RetailPrice,
+                        VATPercent = selected.VatInPercent
 
                     });
                 loadTotal();
-                }
+            }
             barButtonItem1.Enabled = true;
 
 
@@ -225,7 +221,7 @@ namespace testApp
         {
             totalAm = 0;
             totalMo = 0;
-            foreach (var item in exportItems)
+            foreach (var item in importItems)
             {
                 totalAm += item.Quantity;
                 totalMo += item.LineTotal;
@@ -235,14 +231,10 @@ namespace testApp
 
         }
 
-        private void bbiRefresh_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            SaveDraft();
-        }
 
         private void bbiPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (exportItems.Count == 0)
+            if (importItems.Count == 0)
             {
                 XtraMessageBox.Show(
                     "Please add at least one book before saving.",
@@ -254,23 +246,23 @@ namespace testApp
             }
             using (testBookEntities db = new testBookEntities())
             {
-                EXPORT_RECEIPT receipt = new EXPORT_RECEIPT();
+                IMPORT_RECEIPT receipt = new IMPORT_RECEIPT();
 
-                receipt.ExportDate = DateTime.Now;
-                receipt.ExporType = comboBoxEdit1.Text;
-                receipt.Reason = textEdit3.Text;
+                receipt.ImportDate = DateTime.Now;
+                //receipt.Importype = comboBoxEdit1.Text;
+                //receipt.Reason = textEdit3.Text;
                 receipt.Note = textEdit5.Text;
-                receipt.ExportCode = textEdit1.Text;
+                receipt.ImportCode = textEdit1.Text;
 
                 receipt.TotalQuantity =
-                    exportItems.Sum(x => x.Quantity);
+                    importItems.Sum(x => x.Quantity);
 
                 receipt.TotalAmount =
-                    exportItems.Sum(x => x.LineTotal);
+                    importItems.Sum(x => x.LineTotal);
 
-                db.EXPORT_RECEIPT.Add(receipt);
+                db.IMPORT_RECEIPT.Add(receipt);
 
-                foreach (var item in exportItems)
+                foreach (var item in importItems)
                 {
                     BOOK book =
                         db.BOOKs.Find(item.BookID);
@@ -278,30 +270,30 @@ namespace testApp
                     if (book == null)
                         continue;
 
-                    
-                    EXPORT_RECEIPT_DETAIL detail =
-                        new EXPORT_RECEIPT_DETAIL();
+
+                    IMPORT_RECEIPT_DETAIL detail =
+                        new IMPORT_RECEIPT_DETAIL();
 
                     detail.BookID = item.BookID;
                     detail.Quantity = item.Quantity;
-                    detail.UnitPrice = item.UnitPrice;
-                    detail.VATPercent = item.VATPercent;
+                    detail.Costprice = item.CostPrice;
+                    //detail.VATPercent = item.VATPercent;
                     detail.LineTotal = item.LineTotal;
 
-                    receipt.EXPORT_RECEIPT_DETAIL.Add(detail);
+                    receipt.IMPORT_RECEIPT_DETAIL.Add(detail);
 
                     book.StockQuantity -= item.Quantity;
                 }
                 db.SaveChanges();
 
                 XtraMessageBox.Show("Saved successfully");
-                exportItems.Clear();
+                importItems.Clear();
             }
         }
 
         private void SaveDraft()
         {
-            if (exportItems.Count == 0)
+            if (importItems.Count == 0)
             {
                 XtraMessageBox.Show(
                     "Please add at least one book before saving.",
@@ -314,33 +306,33 @@ namespace testApp
             using (var db = new testBookEntities())
             {
                 var receipt =
-                    db.EXPORT_RECEIPT.Find(CurrentExportID);
+                    db.IMPORT_RECEIPT.Find(CurrentImportID);
 
                 receipt.CreatedAt = DateTime.Now;
-                receipt.ExporType = comboBoxEdit1.Text;
-                receipt.Reason = textEdit3.Text;
+                //receipt.Importype = comboBoxEdit1.Text;
+                //receipt.Reason = textEdit3.Text;
                 receipt.Note = textEdit5.Text;
-                receipt.ExportCode = textEdit1.Text;
+                receipt.ImportCode = textEdit1.Text;
 
                 receipt.TotalQuantity =
-                    exportItems.Sum(x => x.Quantity);
+                    importItems.Sum(x => x.Quantity);
 
                 receipt.TotalAmount =
-                    exportItems.Sum(x => x.LineTotal);
+                    importItems.Sum(x => x.LineTotal);
                 // Delete old details
-                db.EXPORT_RECEIPT_DETAIL.RemoveRange(
-                    receipt.EXPORT_RECEIPT_DETAIL);
+                db.IMPORT_RECEIPT_DETAIL.RemoveRange(
+                    receipt.IMPORT_RECEIPT_DETAIL);
 
                 // Recreate details
-                foreach (var item in exportItems)
+                foreach (var item in importItems)
                 {
-                    receipt.EXPORT_RECEIPT_DETAIL.Add(
-                        new EXPORT_RECEIPT_DETAIL
+                    receipt.IMPORT_RECEIPT_DETAIL.Add(
+                        new IMPORT_RECEIPT_DETAIL
                         {
                             BookID = item.BookID,
                             Quantity = item.Quantity,
-                            UnitPrice = item.UnitPrice,
-                            VATPercent = item.VATPercent
+                            Costprice = item.CostPrice,
+                            //VATPercent = item.VATPercent
                         });
                 }
 
@@ -356,64 +348,52 @@ namespace testApp
             using (var db = new testBookEntities())
             {
                 var receipt =
-                    db.EXPORT_RECEIPT.Find(CurrentExportID);
+                    db.IMPORT_RECEIPT.Find(CurrentImportID);
 
                 if (receipt.Status != "Draft")
                     return;
 
+
                 foreach (var detail in
-                    receipt.EXPORT_RECEIPT_DETAIL)
+                    receipt.IMPORT_RECEIPT_DETAIL)
                 {
                     var book =
                         db.BOOKs.Find(detail.BookID);
 
-                    if (book.StockQuantity < detail.Quantity)
-                    {
-                        XtraMessageBox.Show(
-                            "Not enough stock.");
-                        return;
-                    }
+                    book.StockQuantity += detail.Quantity;
                 }
 
-                foreach (var detail in
-                    receipt.EXPORT_RECEIPT_DETAIL)
-                {
-                    var book =
-                        db.BOOKs.Find(detail.BookID);
-
-                    book.StockQuantity -= detail.Quantity;
-                }
-
-                receipt.ExportDate =    DateTime.Now;
                 receipt.Status = "Approved";
+                receipt.ImportDate = DateTime.Now;
 
                 db.SaveChanges();
                 barButtonItem2.Enabled = true;
             }
         }
 
-        private void newExport()
+        private void newImport()
         {
             using (testBookEntities db = new testBookEntities())
             {
-                EXPORT_RECEIPT receipt = new EXPORT_RECEIPT();
+                IMPORT_RECEIPT receipt = new IMPORT_RECEIPT();
 
-                receipt.ExportDate = DateTime.Now;
+                receipt.ImportDate = DateTime.Now;
                 receipt.Status = "Draft";
 
-                db.EXPORT_RECEIPT.Add(receipt);
+                db.IMPORT_RECEIPT.Add(receipt);
                 db.SaveChanges();
 
-                CurrentExportID = receipt.ExportID;
-                textEdit1.Text = "PX000" + CurrentExportID;
-                textEdit2.Text = receipt.ExportDate.ToString();
+                CurrentImportID = receipt.ImportID;
+                textEdit1.Text = "PN000" + CurrentImportID;
+                textEdit2.Text = receipt.ImportDate.ToString();
                 onNew();
             }
         }
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
         {
-            newExport();
+            newImport();
+            panelControl1.Enabled = true;
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
@@ -425,44 +405,90 @@ namespace testApp
             {
                 int rowHandle = info.RowHandle;
                 object rowData = view.GetRow(rowHandle);
-                object value = gridView1.GetRowCellValue(rowHandle, "ExportID");
-                int exportId = Convert.ToInt32(value);
+                object value = gridView1.GetRowCellValue(rowHandle, "ImportID");
+                int ImportId = Convert.ToInt32(value);
 
-                EXPORT_RECEIPT selected = _exports.FirstOrDefault(x => x.ExportID == exportId);
+                IMPORT_RECEIPT selected = _imports.FirstOrDefault(x => x.ImportID == ImportId);
                 if (selected != null)
                 {
-                    CurrentExportID = selected.ExportID;
-                    textEdit1.Text = selected.ExportID.ToString();
-                    textEdit2.Text= selected.ExportDate.ToString();
+                    CurrentImportID = selected.ImportID;
+                    textEdit1.Text = selected.ImportID.ToString();
+                    textEdit2.Text = selected.ImportDate.ToString();
                     textEdit6.Text = selected.TotalQuantity.ToString();
-                    textEdit8.Text = selected.TotalVATAmount.ToString();
+                    //textEdit8.Text = selected.TotalVATAmount.ToString();
                     textEdit7.Text = selected.TotalAmount.ToString();
-                    textEdit3.Text = selected.Reason.ToString();
+                    //textEdit3.Text = selected.Reason.ToString();
                     textEdit5.Text = selected.Note.ToString();
-                    exportItems = new BindingList<ExportItem>(
-                    selected.EXPORT_RECEIPT_DETAIL
-                        .Select(d => new ExportItem
+                    importItems = new BindingList<ImportItem>(
+                    selected.IMPORT_RECEIPT_DETAIL
+                        .Select(d => new ImportItem
                         {
                             BookID = Convert.ToInt32(d.BookID),
                             ISBN = d.BOOK.ISBN,
                             Title = d.BOOK.Title,
                             Quantity = Convert.ToInt32(d.Quantity),
-                            UnitPrice = Convert.ToInt32(d.UnitPrice),
-                            VATPercent = Convert.ToInt32(d.VATPercent)
+                            CostPrice = Convert.ToInt32(d.Costprice),
+                            //VATPercent = Convert.ToInt32(d.VATPercent)
                         })
                         .ToList());
 
-                    gridControl.DataSource = exportItems;
+                    gridControl.DataSource = importItems;
+                    panelControl1.Enabled = false;
+                    bbiDelete.Enabled = false;
+                    closeBtn.Visibility = BarItemVisibility.Always;
                 }
             }
             gridControl1.Visible = false;
-            
+
         }
 
         private void closeBtn_ItemClick(object sender, ItemClickEventArgs e)
         {
             gridControl1.Visible = true;
+            closeBtn.Visibility = BarItemVisibility.Never;
+            ReLoad();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SaveDraft();
+        }
+
+        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ApproveReceipt();
+        }
+
+        private void bbiDelete_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            int bookId = Convert.ToInt32(gridView.GetFocusedRowCellValue("BookID"));
+            DialogResult result = XtraMessageBox.Show(
+        "Delete this book?",
+        "Confirm",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                using (testBookEntities db = new testBookEntities())
+                {
+                    var item = importItems.FirstOrDefault( i => i.BookID ==  bookId );
+
+                    if (item != null)
+                    {
+                        importItems.Remove(item);
+                    }
+                }
+                loadTotal();
+
+                gridView.RefreshData();
+            }
+        }
+
+        private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            bbiDelete.Enabled = true;
+            panelControl1.Enabled = true;
         }
     }
-    
 }

@@ -12,13 +12,13 @@
         <AssociationConnector Association="testBookModel.FK__BOOK__CategoryID__4E88ABD4" />
         <AssociationConnector Association="testBookModel.BOOK_AUTHOR" />
         <AssociationConnector Association="testBookModel.BOOK_CATEGORY" />
-        <EntityTypeShape EntityType="testBookModel.EXPORT_RECEIPT" Width="1.5" PointX="2.875" PointY="12.375" />
         <EntityTypeShape EntityType="testBookModel.EXPORT_RECEIPT_DETAIL" Width="1.5" PointX="5.125" PointY="4.625" />
-        <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT" Width="1.5" PointX="8.75" PointY="7.875" />
         <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT_DETAIL" Width="1.5" PointX="7.125" PointY="0.75" />
         <AssociationConnector Association="testBookModel.FK__EXPORT_RE__BookI__17036CC0" />
         <AssociationConnector Association="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" />
+        <EntityTypeShape EntityType="testBookModel.EXPORT_RECEIPT" Width="1.5" PointX="3" PointY="8.25" />
         <AssociationConnector Association="testBookModel.FK__EXPORT_RE__Expor__160F4887" />
+        <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT" Width="1.5" PointX="7.375" PointY="5" />
         <AssociationConnector Association="testBookModel.FK__IMPORT_RE__Impor__04E4BC85" />
       </Diagram>
     </edmx:Diagrams>

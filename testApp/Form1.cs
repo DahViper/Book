@@ -36,6 +36,24 @@ namespace testApp
             //LoadAuthor();
         }
 
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("Book", "XtraUserControl1");
+            documentManager1.View.AddDocument(new XtraUserControl1());
+        }
+
+        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("Export", "XtraUserControl2");
+            documentManager1.View.AddDocument(new XtraUserControl2());
+        }
+
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("Import", "XtraUserControl3");
+            documentManager1.View.AddDocument(new XtraUserControl3());
+        }
+
 
         //void bbiUpdate_ItemClick(object sender, ItemClickEventArgs e)
         //{

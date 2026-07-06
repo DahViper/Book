@@ -28,6 +28,7 @@ namespace testApp
         public Nullable<int> TotalQuantity { get; set; }
         public Nullable<decimal> TotalAmount { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
+        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT_RECEIPT_DETAIL> IMPORT_RECEIPT_DETAIL { get; set; }
