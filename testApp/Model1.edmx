@@ -55,6 +55,29 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="JoinDate" Type="date" Nullable="false" />
+          <Property Name="CustomerTypeID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CUSTOMER_TYPE">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="EXPORT_RECEIPT">
           <Key>
             <PropertyRef Name="ExportID" />
@@ -229,12 +252,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CUSTOMER_CUSTOMER_TYPE">
+          <End Role="CUSTOMER_TYPE" Type="Self.CUSTOMER_TYPE" Multiplicity="1" />
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER_TYPE">
+              <PropertyRef Name="CustomerTypeID" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="CustomerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="testBookModelStoreContainer">
           <EntitySet Name="AUTHOR" EntityType="Self.AUTHOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK_AUTHOR" EntityType="Self.BOOK_AUTHOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOK_CATEGORY" EntityType="Self.BOOK_CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER_TYPE" EntityType="Self.CUSTOMER_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EXPORT_RECEIPT" EntityType="Self.EXPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EXPORT_RECEIPT_DETAIL" EntityType="Self.EXPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT_RECEIPT" EntityType="Self.IMPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
@@ -278,6 +315,10 @@
           <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="Self.FK__IMPORT_RE__Impor__04E4BC85">
             <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
             <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CUSTOMER_CUSTOMER_TYPE" Association="Self.FK_CUSTOMER_CUSTOMER_TYPE">
+            <End Role="CUSTOMER_TYPE" EntitySet="CUSTOMER_TYPE" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -367,6 +408,12 @@
           <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="testBookModel.FK__IMPORT_RE__Impor__04E4BC85">
             <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
             <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <EntitySet Name="CUSTOMERs" EntityType="testBookModel.CUSTOMER" />
+          <EntitySet Name="CUSTOMER_TYPE" EntityType="testBookModel.CUSTOMER_TYPE" />
+          <AssociationSet Name="FK_CUSTOMER_CUSTOMER_TYPE" Association="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE">
+            <End Role="CUSTOMER_TYPE" EntitySet="CUSTOMER_TYPE" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -509,6 +556,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CUSTOMER_TYPE" Relationship="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE" FromRole="CUSTOMER" ToRole="CUSTOMER_TYPE" />
+        </EntityType>
+        <EntityType Name="CUSTOMER_TYPE">
+          <Key>
+            <PropertyRef Name="CustomerTypeID" />
+          </Key>
+          <Property Name="CustomerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="CUSTOMERs" Relationship="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE" FromRole="CUSTOMER_TYPE" ToRole="CUSTOMER" />
+        </EntityType>
+        <Association Name="FK_CUSTOMER_CUSTOMER_TYPE">
+          <End Type="testBookModel.CUSTOMER_TYPE" Role="CUSTOMER_TYPE" Multiplicity="1" />
+          <End Type="testBookModel.CUSTOMER" Role="CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER_TYPE">
+              <PropertyRef Name="CustomerTypeID" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="CustomerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -623,6 +707,31 @@
                 <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
                 <ScalarProperty Name="ImportCode" ColumnName="ImportCode" />
                 <ScalarProperty Name="ImportID" ColumnName="ImportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="testBookModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMER_TYPE">
+            <EntityTypeMapping TypeName="testBookModel.CUSTOMER_TYPE">
+              <MappingFragment StoreEntitySet="CUSTOMER_TYPE">
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -54,6 +54,12 @@ namespace testApp
             documentManager1.View.AddDocument(new XtraUserControl3());
         }
 
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("Customer", "XtraUserControl4");
+            documentManager1.View.AddDocument(new XtraUserControl4());
+        }
+
 
         //void bbiUpdate_ItemClick(object sender, ItemClickEventArgs e)
         //{
