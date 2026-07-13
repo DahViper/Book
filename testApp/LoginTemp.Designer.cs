@@ -1,6 +1,6 @@
 ﻿namespace testApp
 {
-    partial class Debug
+    partial class LoginTemp
     {
         /// <summary>
         /// Required designer variable.
@@ -29,47 +29,48 @@
         private void InitializeComponent()
         {
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(74, 52);
+            this.simpleButton1.Location = new System.Drawing.Point(142, 220);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(84, 26);
             this.simpleButton1.TabIndex = 0;
             this.simpleButton1.Text = "Main";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
-            // simpleButton2
+            // textEdit1
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(74, 84);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(84, 31);
-            this.simpleButton2.TabIndex = 1;
-            this.simpleButton2.Text = "Money";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            this.textEdit1.Location = new System.Drawing.Point(145, 85);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Size = new System.Drawing.Size(125, 22);
+            this.textEdit1.TabIndex = 1;
             // 
-            // simpleButton3
+            // textEdit2
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(74, 121);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(84, 31);
-            this.simpleButton3.TabIndex = 1;
-            this.simpleButton3.Text = "Export";
-            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            this.textEdit2.Location = new System.Drawing.Point(143, 128);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Size = new System.Drawing.Size(125, 22);
+            this.textEdit2.TabIndex = 2;
             // 
-            // Debug
+            // LoginTemp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 260);
-            this.Controls.Add(this.simpleButton3);
-            this.Controls.Add(this.simpleButton2);
+            this.ClientSize = new System.Drawing.Size(434, 329);
+            this.Controls.Add(this.textEdit2);
+            this.Controls.Add(this.textEdit1);
             this.Controls.Add(this.simpleButton1);
-            this.Name = "Debug";
+            this.Name = "LoginTemp";
             this.Text = "Debug";
+            this.Load += new System.EventHandler(this.LoginTemp_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -77,7 +78,7 @@
         #endregion
 
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit textEdit2;
     }
 }

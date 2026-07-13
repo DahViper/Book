@@ -23,9 +23,19 @@ namespace testApp
         }
         void bbiSave_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (textEdit2 != null && textEdit3 != null && textEdit4 != null)
+            if (string.IsNullOrWhiteSpace(textEdit2.Text) ||
+        string.IsNullOrWhiteSpace(textEdit3.Text) ||
+        string.IsNullOrWhiteSpace(textEdit4.Text))
             {
-                int id = Convert.ToInt32(textEdit1.Text);
+                XtraMessageBox.Show(
+                    "Please fill in all data fields before saving.",
+                    "Validation",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
+            int id = Convert.ToInt32(textEdit1.Text);
                 using (testBookEntities db = new testBookEntities())
                 {
                     USER user = db.USERS.Find(id);
@@ -40,10 +50,10 @@ namespace testApp
                 }
 
                 loadTable();
-            }
+            
         }
 
-        private void XtraUserControl4_Load(object sender, EventArgs e)
+        private void XtraUserControl5_Load(object sender, EventArgs e)
         {
             loadTable();
             panelControl1.Enabled = false;
@@ -68,7 +78,7 @@ namespace testApp
 
         private void gridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            object value = gridView.GetFocusedRowCellValue("userID");
+            object value = gridView.GetFocusedRowCellValue("UserID");
             if (value == null) return;
 
             int id = Convert.ToInt32(value);
@@ -84,7 +94,7 @@ namespace testApp
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
         {
             XtraForm3 form = new XtraForm3();
-            form.userSaved += XtraUserControl4_Load;
+            form.userSaved += XtraUserControl5_Load;
             form.Show();
         }
 
@@ -124,7 +134,6 @@ namespace testApp
             panelControl1.Enabled = !panelControl1.Enabled;
             bbiSave.Enabled = !bbiSave.Enabled;
         }
-
 
     }
 }

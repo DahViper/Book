@@ -50,8 +50,8 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
@@ -103,7 +103,7 @@
             this.bbiRefresh});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl.Margin = new System.Windows.Forms.Padding(4);
-            this.ribbonControl.MaxItemId = 20;
+            this.ribbonControl.MaxItemId = 21;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.OptionsMenuMinWidth = 385;
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -136,6 +136,7 @@
             this.bbiNew.Id = 16;
             this.bbiNew.ImageOptions.ImageUri.Uri = "New";
             this.bbiNew.Name = "bbiNew";
+            this.bbiNew.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiNew_ItemClick);
             // 
             // bbiEdit
             // 
@@ -282,16 +283,9 @@
             this.panelControl1.Size = new System.Drawing.Size(933, 138);
             this.panelControl1.TabIndex = 4;
             // 
-            // labelControl5
-            // 
-            this.labelControl5.Location = new System.Drawing.Point(649, 57);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(25, 16);
-            this.labelControl5.TabIndex = 1;
-            this.labelControl5.Text = "Role";
-            // 
             // comboBoxEdit1
             // 
+            this.comboBoxEdit1.EditValue = "Manager";
             this.comboBoxEdit1.Location = new System.Drawing.Point(736, 54);
             this.comboBoxEdit1.MenuManager = this.ribbonControl;
             this.comboBoxEdit1.Name = "comboBoxEdit1";
@@ -304,6 +298,14 @@
             this.comboBoxEdit1.Size = new System.Drawing.Size(89, 22);
             this.comboBoxEdit1.TabIndex = 2;
             // 
+            // labelControl5
+            // 
+            this.labelControl5.Location = new System.Drawing.Point(649, 57);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(25, 16);
+            this.labelControl5.TabIndex = 1;
+            this.labelControl5.Text = "Role";
+            // 
             // XtraUserControl5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -315,7 +317,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "XtraUserControl5";
             this.Size = new System.Drawing.Size(933, 738);
-            this.Load += new System.EventHandler(this.XtraUserControl4_Load);
+            this.Load += new System.EventHandler(this.XtraUserControl5_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();

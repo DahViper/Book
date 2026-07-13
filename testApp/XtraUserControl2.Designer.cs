@@ -36,7 +36,7 @@
             this.bbiNew = new DevExpress.XtraBars.BarButtonItem();
             this.bbiEdit = new DevExpress.XtraBars.BarButtonItem();
             this.bbiDelete = new DevExpress.XtraBars.BarButtonItem();
-            this.bbiRefresh = new DevExpress.XtraBars.BarButtonItem();
+            this.bbiSave = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.closeBtn = new DevExpress.XtraBars.BarButtonItem();
@@ -131,7 +131,7 @@
             this.bbiNew,
             this.bbiEdit,
             this.bbiDelete,
-            this.bbiRefresh,
+            this.bbiSave,
             this.barButtonItem1,
             this.barButtonItem2,
             this.closeBtn});
@@ -176,6 +176,7 @@
             this.bbiEdit.Id = 17;
             this.bbiEdit.ImageOptions.ImageUri.Uri = "Edit";
             this.bbiEdit.Name = "bbiEdit";
+            this.bbiEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiEdit_ItemClick);
             // 
             // bbiDelete
             // 
@@ -184,14 +185,14 @@
             this.bbiDelete.ImageOptions.ImageUri.Uri = "Delete";
             this.bbiDelete.Name = "bbiDelete";
             // 
-            // bbiRefresh
+            // bbiSave
             // 
-            this.bbiRefresh.Caption = "Save";
-            this.bbiRefresh.Id = 19;
-            this.bbiRefresh.ImageOptions.ImageUri.Uri = "Refresh";
-            this.bbiRefresh.ImageOptions.SvgImage = global::testApp.Properties.Resources.save;
-            this.bbiRefresh.Name = "bbiRefresh";
-            this.bbiRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiRefresh_ItemClick);
+            this.bbiSave.Caption = "Save";
+            this.bbiSave.Id = 19;
+            this.bbiSave.ImageOptions.ImageUri.Uri = "Refresh";
+            this.bbiSave.ImageOptions.SvgImage = global::testApp.Properties.Resources.save;
+            this.bbiSave.Name = "bbiSave";
+            this.bbiSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiRefresh_ItemClick);
             // 
             // barButtonItem1
             // 
@@ -201,6 +202,7 @@
             this.barButtonItem1.ItemAppearance.Disabled.BackColor = System.Drawing.Color.Silver;
             this.barButtonItem1.ItemAppearance.Disabled.Options.UseBackColor = true;
             this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonItem2
             // 
@@ -214,6 +216,7 @@
             // closeBtn
             // 
             this.closeBtn.Caption = "Close";
+            this.closeBtn.Enabled = false;
             this.closeBtn.Id = 22;
             this.closeBtn.ImageOptions.SvgImage = global::testApp.Properties.Resources.close;
             this.closeBtn.Name = "closeBtn";
@@ -244,7 +247,7 @@
             // 
             this.ribbonPageGroup2.AllowTextClipping = false;
             this.ribbonPageGroup2.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbonPageGroup2.ItemLinks.Add(this.bbiRefresh);
+            this.ribbonPageGroup2.ItemLinks.Add(this.bbiSave);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem2);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
@@ -603,7 +606,7 @@
         private DevExpress.XtraBars.BarButtonItem bbiNew;
         private DevExpress.XtraBars.BarButtonItem bbiEdit;
         private DevExpress.XtraBars.BarButtonItem bbiDelete;
-        private DevExpress.XtraBars.BarButtonItem bbiRefresh;
+        private DevExpress.XtraBars.BarButtonItem bbiSave;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit textEdit1;

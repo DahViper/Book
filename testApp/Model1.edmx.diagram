@@ -20,12 +20,14 @@
         <AssociationConnector Association="testBookModel.FK__EXPORT_RE__Expor__160F4887" />
         <EntityTypeShape EntityType="testBookModel.IMPORT_RECEIPT" Width="1.5" PointX="7.375" PointY="5" />
         <AssociationConnector Association="testBookModel.FK__IMPORT_RE__Impor__04E4BC85" />
-        <EntityTypeShape EntityType="testBookModel.CUSTOMER" Width="1.5" PointX="9.25" PointY="9" />
-        <EntityTypeShape EntityType="testBookModel.CUSTOMER_TYPE" Width="1.5" PointX="7" PointY="9.625" />
+        <EntityTypeShape EntityType="testBookModel.CUSTOMER" Width="1.5" PointX="8" PointY="8.875" />
+        <EntityTypeShape EntityType="testBookModel.CUSTOMER_TYPE" Width="1.5" PointX="5.75" PointY="9.625" />
         <AssociationConnector Association="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE" />
         <EntityTypeShape EntityType="testBookModel.ROLE" Width="1.5" PointX="9.375" PointY="1.375" />
         <EntityTypeShape EntityType="testBookModel.USER" Width="1.5" PointX="11.625" PointY="1" />
         <AssociationConnector Association="testBookModel.FK__USERS__RoleID__540C7B00" />
+        <EntityTypeShape EntityType="testBookModel.PERMISSION" Width="1.5" PointX="7.125" PointY="13.375" />
+        <AssociationConnector Association="testBookModel.ROLE_PERMISSION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace testApp
 {
@@ -25,10 +26,19 @@ namespace testApp
         {
             using (testBookEntities db = new testBookEntities())
             {
-                if (textEdit1 != null && textEdit2 != null && textEdit3 != null)
+                if (string.IsNullOrWhiteSpace(textEdit1.Text) ||
+        string.IsNullOrWhiteSpace(textEdit2.Text) ||
+        string.IsNullOrWhiteSpace(textEdit3.Text))
                 {
+                    XtraMessageBox.Show(
+                        "Please fill in all data fields before saving.",
+                        "Validation",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
 
-                
+
                 if (XtraMessageBox.Show("Do you want to add a new value?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     USER user = new USER()
@@ -43,7 +53,7 @@ namespace testApp
                     userSaved?.Invoke(this, EventArgs.Empty);
                 }
 
-                }
+                
             }
         }
 

@@ -12,21 +12,19 @@ namespace testApp
     using System;
     using System.Collections.Generic;
     
-    public partial class ROLE
+    public partial class PERMISSION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ROLE()
+        public PERMISSION()
         {
-            this.USERS = new HashSet<USER>();
-            this.PERMISSIONs = new HashSet<PERMISSION>();
+            this.ROLEs = new HashSet<ROLE>();
         }
     
-        public int RoleID { get; set; }
-        public string RoleName { get; set; }
+        public int PermissionID { get; set; }
+        public string PermissionCode { get; set; }
+        public string PermissionName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER> USERS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PERMISSION> PERMISSIONs { get; set; }
+        public virtual ICollection<ROLE> ROLEs { get; set; }
     }
 }

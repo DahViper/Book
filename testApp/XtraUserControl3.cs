@@ -69,7 +69,7 @@ namespace testApp
 
         private void Import_Load(object sender, EventArgs e)
         {
-            
+            ApplyPermission();
             ReLoad();
             //LoadCategories2();
             //LoadAuthor();
@@ -489,6 +489,15 @@ namespace testApp
         {
             bbiDelete.Enabled = true;
             panelControl1.Enabled = true;
+        }
+
+        private void ApplyPermission()
+        {
+            bbiNew.Enabled = PermissionService.Has("IMPORT_ADD");
+            bbiEdit.Enabled = PermissionService.Has("IMPORT_EDIT");
+            barButtonItem1.Enabled = PermissionService.Has("IMPORT_EDIT");
+            barButtonItem2.Enabled = PermissionService.Has("IMPORT_APPROVE");
+            gridControl.Enabled = PermissionService.Has("IMPORT_VIEW");
         }
     }
 }

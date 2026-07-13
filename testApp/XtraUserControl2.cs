@@ -77,6 +77,7 @@ namespace testApp
 
         private void Export_Load(object sender, EventArgs e)
         {
+            ApplyPermission();
             loadExport();
             ReLoad();
             //LoadCategories2();
@@ -456,12 +457,34 @@ namespace testApp
                 }
             }
             gridControl1.Visible = false;
+            closeBtn.Enabled = true;
             
         }
 
         private void closeBtn_ItemClick(object sender, ItemClickEventArgs e)
         {
             gridControl1.Visible = true;
+            closeBtn.Enabled = false;
+        }
+
+        private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void ApplyPermission()
+        {
+            bbiNew.Enabled = PermissionService.Has("EXPORT_ADD");
+            bbiEdit.Enabled = PermissionService.Has("EXPORT_EDIT");
+            bbiDelete.Enabled = PermissionService.Has("EXPORT_EDIT");
+            bbiSave.Enabled = PermissionService.Has("EXPORT_EDIT");
+            barButtonItem1.Enabled = PermissionService.Has("EXPORT_APPROVE");
+            
+        }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ApproveReceipt();
         }
     }
     

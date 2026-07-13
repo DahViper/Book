@@ -26,15 +26,17 @@ namespace testApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ApplyPermission();
             LoadBooks();
             LoadCategories2();
             LoadAuthor();
         }
+
         void bbiUpdate_ItemClick(object sender, ItemClickEventArgs e)
         {
             int bookId = Convert.ToInt32(gridView.GetFocusedRowCellValue("BookID"));
             DialogResult result = XtraMessageBox.Show(
-        "Delete this book?",
+        "Save this book?",
         "Confirm",
         MessageBoxButtons.YesNo,
         MessageBoxIcon.Warning);
@@ -360,6 +362,15 @@ namespace testApp
             }
 
             System.Diagnostics.Debug.WriteLine($"UserControl size changed: {this.Size}");
+        }
+
+        private void ApplyPermission()
+        {
+            bbiNew.Enabled = PermissionService.Has("BOOK_ADD");
+            bbiEdit.Enabled = PermissionService.Has("BOOK_EDIT");
+            bbiDelete.Enabled = PermissionService.Has("BOOK_EDIT");
+            bbiUpdate.Enabled = PermissionService.Has("BOOK_EDIT");
+            gridControl.Enabled = PermissionService.Has("BOOK_VIEW");
         }
 
     }

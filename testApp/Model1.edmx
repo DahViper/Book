@@ -132,12 +132,28 @@
           <Property Name="Costprice" Type="decimal" Precision="19" Scale="4" />
           <Property Name="LineTotal" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="ROLE">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLE_PERMISSION">
+          <Key>
+            <PropertyRef Name="RoleID" />
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -270,6 +286,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ROLE_PERM__Permi__662B2B3B">
+          <End Role="PERMISSION" Type="Self.PERMISSION" Multiplicity="1" />
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSION">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="ROLE_PERMISSION">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ROLE_PERM__RoleI__65370702">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="ROLE_PERMISSION">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__USERS__RoleID__540C7B00">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
@@ -306,7 +346,9 @@
           <EntitySet Name="EXPORT_RECEIPT_DETAIL" EntityType="Self.EXPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT_RECEIPT" EntityType="Self.IMPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT_RECEIPT_DETAIL" EntityType="Self.IMPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLE_PERMISSION" EntityType="Self.ROLE_PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="Self.FK__BOOK__AuthorID__4D94879B">
             <End Role="AUTHOR" EntitySet="AUTHOR" />
@@ -347,6 +389,14 @@
           <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="Self.FK__IMPORT_RE__Impor__04E4BC85">
             <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
             <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE_PERM__Permi__662B2B3B" Association="Self.FK__ROLE_PERM__Permi__662B2B3B">
+            <End Role="PERMISSION" EntitySet="PERMISSION" />
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ROLE_PERM__RoleI__65370702" Association="Self.FK__ROLE_PERM__RoleI__65370702">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
           </AssociationSet>
           <AssociationSet Name="FK__USERS__RoleID__540C7B00" Association="Self.FK__USERS__RoleID__540C7B00">
             <End Role="ROLE" EntitySet="ROLE" />
@@ -456,6 +506,11 @@
           <AssociationSet Name="FK__USERS__RoleID__540C7B00" Association="testBookModel.FK__USERS__RoleID__540C7B00">
             <End Role="ROLE" EntitySet="ROLEs" />
             <End Role="USER" EntitySet="USERS" />
+          </AssociationSet>
+          <EntitySet Name="PERMISSIONs" EntityType="testBookModel.PERMISSION" />
+          <AssociationSet Name="ROLE_PERMISSION" Association="testBookModel.ROLE_PERMISSION">
+            <End Role="PERMISSION" EntitySet="PERMISSIONs" />
+            <End Role="ROLE" EntitySet="ROLEs" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -642,6 +697,7 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="USERS" Relationship="testBookModel.FK__USERS__RoleID__540C7B00" FromRole="ROLE" ToRole="USER" />
+          <NavigationProperty Name="PERMISSIONs" Relationship="testBookModel.ROLE_PERMISSION" FromRole="ROLE" ToRole="PERMISSION" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -666,6 +722,19 @@
               <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PermissionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ROLEs" Relationship="testBookModel.ROLE_PERMISSION" FromRole="PERMISSION" ToRole="ROLE" />
+        </EntityType>
+        <Association Name="ROLE_PERMISSION">
+          <End Type="testBookModel.PERMISSION" Role="PERMISSION" Multiplicity="*" />
+          <End Type="testBookModel.ROLE" Role="ROLE" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -829,6 +898,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONs">
+            <EntityTypeMapping TypeName="testBookModel.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSION">
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+                <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ROLE_PERMISSION" TypeName="testBookModel.ROLE_PERMISSION" StoreEntitySet="ROLE_PERMISSION">
+            <EndProperty Name="ROLE">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+            <EndProperty Name="PERMISSION">
+              <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
