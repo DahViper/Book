@@ -132,6 +132,24 @@
           <Property Name="Costprice" Type="decimal" Precision="19" Scale="4" />
           <Property Name="LineTotal" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
           <End Role="AUTHOR" Type="Self.AUTHOR" Multiplicity="0..1" />
           <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
@@ -252,6 +270,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__USERS__RoleID__540C7B00">
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CUSTOMER_CUSTOMER_TYPE">
           <End Role="CUSTOMER_TYPE" Type="Self.CUSTOMER_TYPE" Multiplicity="1" />
           <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="*" />
@@ -276,6 +306,8 @@
           <EntitySet Name="EXPORT_RECEIPT_DETAIL" EntityType="Self.EXPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT_RECEIPT" EntityType="Self.IMPORT_RECEIPT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT_RECEIPT_DETAIL" EntityType="Self.IMPORT_RECEIPT_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="Self.FK__BOOK__AuthorID__4D94879B">
             <End Role="AUTHOR" EntitySet="AUTHOR" />
             <End Role="BOOK" EntitySet="BOOK" />
@@ -315,6 +347,10 @@
           <AssociationSet Name="FK__IMPORT_RE__Impor__04E4BC85" Association="Self.FK__IMPORT_RE__Impor__04E4BC85">
             <End Role="IMPORT_RECEIPT" EntitySet="IMPORT_RECEIPT" />
             <End Role="IMPORT_RECEIPT_DETAIL" EntitySet="IMPORT_RECEIPT_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USERS__RoleID__540C7B00" Association="Self.FK__USERS__RoleID__540C7B00">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
           <AssociationSet Name="FK_CUSTOMER_CUSTOMER_TYPE" Association="Self.FK_CUSTOMER_CUSTOMER_TYPE">
             <End Role="CUSTOMER_TYPE" EntitySet="CUSTOMER_TYPE" />
@@ -414,6 +450,12 @@
           <AssociationSet Name="FK_CUSTOMER_CUSTOMER_TYPE" Association="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE">
             <End Role="CUSTOMER_TYPE" EntitySet="CUSTOMER_TYPE" />
             <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+          </AssociationSet>
+          <EntitySet Name="ROLEs" EntityType="testBookModel.ROLE" />
+          <EntitySet Name="USERS" EntityType="testBookModel.USER" />
+          <AssociationSet Name="FK__USERS__RoleID__540C7B00" Association="testBookModel.FK__USERS__RoleID__540C7B00">
+            <End Role="ROLE" EntitySet="ROLEs" />
+            <End Role="USER" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -593,6 +635,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USERS" Relationship="testBookModel.FK__USERS__RoleID__540C7B00" FromRole="ROLE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ROLE" Relationship="testBookModel.FK__USERS__RoleID__540C7B00" FromRole="USER" ToRole="ROLE" />
+        </EntityType>
+        <Association Name="FK__USERS__RoleID__540C7B00">
+          <End Type="testBookModel.ROLE" Role="ROLE" Multiplicity="1" />
+          <End Type="testBookModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -732,6 +806,26 @@
                 <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="CustomerTypeID" ColumnName="CustomerTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLEs">
+            <EntityTypeMapping TypeName="testBookModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLE">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="testBookModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

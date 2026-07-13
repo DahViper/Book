@@ -23,6 +23,9 @@
         <EntityTypeShape EntityType="testBookModel.CUSTOMER" Width="1.5" PointX="9.25" PointY="9" />
         <EntityTypeShape EntityType="testBookModel.CUSTOMER_TYPE" Width="1.5" PointX="7" PointY="9.625" />
         <AssociationConnector Association="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE" />
+        <EntityTypeShape EntityType="testBookModel.ROLE" Width="1.5" PointX="9.375" PointY="1.375" />
+        <EntityTypeShape EntityType="testBookModel.USER" Width="1.5" PointX="11.625" PointY="1" />
+        <AssociationConnector Association="testBookModel.FK__USERS__RoleID__540C7B00" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

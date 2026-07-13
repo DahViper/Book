@@ -34,5 +34,7 @@ namespace testApp
         public virtual DbSet<IMPORT_RECEIPT> IMPORT_RECEIPT { get; set; }
         public virtual DbSet<CUSTOMER> CUSTOMERs { get; set; }
         public virtual DbSet<CUSTOMER_TYPE> CUSTOMER_TYPE { get; set; }
+        public virtual DbSet<ROLE> ROLEs { get; set; }
+        public virtual DbSet<USER> USERS { get; set; }
     }
 }

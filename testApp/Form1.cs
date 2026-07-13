@@ -44,20 +44,26 @@ namespace testApp
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
-            documentManager1.View.AddDocument("Export", "XtraUserControl2");
+            documentManager1.View.AddDocument("Book", "XtraUserControl2");
             documentManager1.View.AddDocument(new XtraUserControl2());
         }
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            documentManager1.View.AddDocument("Import", "XtraUserControl3");
+            documentManager1.View.AddDocument("Book", "XtraUserControl3");
             documentManager1.View.AddDocument(new XtraUserControl3());
         }
 
         private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
         {
-            documentManager1.View.AddDocument("Customer", "XtraUserControl4");
+            documentManager1.View.AddDocument("Book", "XtraUserControl4");
             documentManager1.View.AddDocument(new XtraUserControl4());
+        }
+
+        private void barButtonItem6_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("Book", "XtraUserControl5");
+            documentManager1.View.AddDocument(new XtraUserControl5());
         }
 
 
