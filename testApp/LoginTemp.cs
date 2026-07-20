@@ -24,7 +24,7 @@ namespace testApp
 
         private void LoginTemp_Load(object sender, EventArgs e)
         {
-
+            textEdit1.Focus();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -51,10 +51,8 @@ namespace testApp
                         .Select(x => x.PermissionCode)
                         .ToHashSet();
 
-                Form1 main = new Form1();
 
-                Hide();
-                main.Show();
+                userLogin();
 
 
             }
@@ -63,9 +61,58 @@ namespace testApp
         {
             throw new NotImplementedException();
         }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            XtraForm4 xtraForm4 = new XtraForm4();
+            Hide();
+            xtraForm4.Show();
+        }
+
+        private void LoginTemp_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                userLogin();
+            }
+            
+        }
+
+        private void userLogin()
+        {
+            if (UserSession.CurrentUser.ROLE.RoleName == "Cashier")
+            {
+                XtraForm4 xtraForm4 = new XtraForm4();
+                Hide();
+                xtraForm4.Show();
+            }
+            else
+            {
+                Form1 main = new Form1();
+
+                Hide();
+                main.Show();
+            }
+        }
+
+        private void textEdit1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textEdit2.Focus();
+            }
+        }
+
+        private void textEdit2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                simpleButton1_Click(this, new EventArgs());
+            }
+        }
     }
 
-        
+
 
     public static class UserSession
     {

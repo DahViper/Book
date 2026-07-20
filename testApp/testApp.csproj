@@ -290,6 +290,12 @@
     <Compile Include="XtraForm4.Designer.cs">
       <DependentUpon>XtraForm4.cs</DependentUpon>
     </Compile>
+    <Compile Include="XtraForm5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XtraForm5.Designer.cs">
+      <DependentUpon>XtraForm5.cs</DependentUpon>
+    </Compile>
     <Compile Include="XtraUserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -348,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="XtraForm4.resx">
       <DependentUpon>XtraForm4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraForm5.resx">
+      <DependentUpon>XtraForm5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl1.resx">
       <DependentUpon>XtraUserControl1.cs</DependentUpon>
