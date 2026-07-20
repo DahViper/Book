@@ -28,6 +28,12 @@
         <AssociationConnector Association="testBookModel.FK__USERS__RoleID__540C7B00" />
         <EntityTypeShape EntityType="testBookModel.PERMISSION" Width="1.5" PointX="7.125" PointY="13.375" />
         <AssociationConnector Association="testBookModel.ROLE_PERMISSION" />
+        <EntityTypeShape EntityType="testBookModel.SALE" Width="1.5" PointX="13.875" PointY="4.75" />
+        <EntityTypeShape EntityType="testBookModel.SALE_DETAIL" Width="1.5" PointX="16.125" PointY="3.125" />
+        <AssociationConnector Association="testBookModel.FK__SALE_DETA__BookI__02C769E9" />
+        <AssociationConnector Association="testBookModel.FK__SALE__CustomerID__7C1A6C5A" />
+        <AssociationConnector Association="testBookModel.FK__SALE__UserID__7D0E9093" />
+        <AssociationConnector Association="testBookModel.FK__SALE_DETA__SaleI__01D345B0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

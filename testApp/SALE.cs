@@ -12,23 +12,29 @@ namespace testApp
     using System;
     using System.Collections.Generic;
     
-    public partial class USER
+    public partial class SALE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
+        public SALE()
         {
-            this.SALEs = new HashSet<SALE>();
+            this.SALE_DETAIL = new HashSet<SALE_DETAIL>();
         }
     
+        public int SaleID { get; set; }
+        public string SaleCode { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public int UserID { get; set; }
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public string FullName { get; set; }
-        public int RoleID { get; set; }
-        public bool IsActive { get; set; }
+        public System.DateTime SaleDate { get; set; }
+        public decimal Subtotal { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal VATAmount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string PaymentMethod { get; set; }
+        public string Status { get; set; }
     
-        public virtual ROLE ROLE { get; set; }
+        public virtual CUSTOMER CUSTOMER { get; set; }
+        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SALE> SALEs { get; set; }
+        public virtual ICollection<SALE_DETAIL> SALE_DETAIL { get; set; }
     }
 }

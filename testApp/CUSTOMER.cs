@@ -14,6 +14,12 @@ namespace testApp
     
     public partial class CUSTOMER
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CUSTOMER()
+        {
+            this.SALEs = new HashSet<SALE>();
+        }
+    
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string FullName { get; set; }
@@ -26,5 +32,7 @@ namespace testApp
         public string Note { get; set; }
     
         public virtual CUSTOMER_TYPE CUSTOMER_TYPE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SALE> SALEs { get; set; }
     }
 }

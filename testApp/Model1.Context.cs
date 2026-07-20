@@ -37,5 +37,7 @@ namespace testApp
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
         public virtual DbSet<PERMISSION> PERMISSIONs { get; set; }
+        public virtual DbSet<SALE> SALEs { get; set; }
+        public virtual DbSet<SALE_DETAIL> SALE_DETAIL { get; set; }
     }
 }

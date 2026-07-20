@@ -155,6 +155,35 @@
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="PermissionID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SALE">
+          <Key>
+            <PropertyRef Name="SaleID" />
+          </Key>
+          <Property Name="SaleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SaleDate" Type="datetime" Nullable="false" />
+          <Property Name="Subtotal" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="VATAmount" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALE_DETAIL">
+          <Key>
+            <PropertyRef Name="SaleDetailID" />
+          </Key>
+          <Property Name="SaleDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="VATPercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="LineTotal" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
         <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="UserID" />
@@ -310,6 +339,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SALE__CustomerID__7C1A6C5A">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <End Role="SALE" Type="Self.SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="SALE">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE__UserID__7D0E9093">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="SALE" Type="Self.SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SALE">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE_DETA__BookI__02C769E9">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+          <End Role="SALE_DETAIL" Type="Self.SALE_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="SALE_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE_DETA__SaleI__01D345B0">
+          <End Role="SALE" Type="Self.SALE" Multiplicity="1" />
+          <End Role="SALE_DETAIL" Type="Self.SALE_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALE">
+              <PropertyRef Name="SaleID" />
+            </Principal>
+            <Dependent Role="SALE_DETAIL">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__USERS__RoleID__540C7B00">
           <End Role="ROLE" Type="Self.ROLE" Multiplicity="1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
@@ -349,6 +426,8 @@
           <EntitySet Name="PERMISSION" EntityType="Self.PERMISSION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE_PERMISSION" EntityType="Self.ROLE_PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALE" EntityType="Self.SALE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALE_DETAIL" EntityType="Self.SALE_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="Self.FK__BOOK__AuthorID__4D94879B">
             <End Role="AUTHOR" EntitySet="AUTHOR" />
@@ -398,6 +477,22 @@
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
           </AssociationSet>
+          <AssociationSet Name="FK__SALE__CustomerID__7C1A6C5A" Association="Self.FK__SALE__CustomerID__7C1A6C5A">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="SALE" EntitySet="SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE__UserID__7D0E9093" Association="Self.FK__SALE__UserID__7D0E9093">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="SALE" EntitySet="SALE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE_DETA__BookI__02C769E9" Association="Self.FK__SALE_DETA__BookI__02C769E9">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="SALE_DETAIL" EntitySet="SALE_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE_DETA__SaleI__01D345B0" Association="Self.FK__SALE_DETA__SaleI__01D345B0">
+            <End Role="SALE" EntitySet="SALE" />
+            <End Role="SALE_DETAIL" EntitySet="SALE_DETAIL" />
+          </AssociationSet>
           <AssociationSet Name="FK__USERS__RoleID__540C7B00" Association="Self.FK__USERS__RoleID__540C7B00">
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="USERS" EntitySet="USERS" />
@@ -445,6 +540,7 @@
           <Property Name="RetailPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="EXPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__EXPORT_RE__BookI__17036CC0" FromRole="BOOK" ToRole="EXPORT_RECEIPT_DETAIL" />
           <NavigationProperty Name="IMPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" FromRole="BOOK" ToRole="IMPORT_RECEIPT_DETAIL" />
+          <NavigationProperty Name="SALE_DETAIL" Relationship="testBookModel.FK__SALE_DETA__BookI__02C769E9" FromRole="BOOK" ToRole="SALE_DETAIL" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -511,6 +607,24 @@
           <AssociationSet Name="ROLE_PERMISSION" Association="testBookModel.ROLE_PERMISSION">
             <End Role="PERMISSION" EntitySet="PERMISSIONs" />
             <End Role="ROLE" EntitySet="ROLEs" />
+          </AssociationSet>
+          <EntitySet Name="SALEs" EntityType="testBookModel.SALE" />
+          <EntitySet Name="SALE_DETAIL" EntityType="testBookModel.SALE_DETAIL" />
+          <AssociationSet Name="FK__SALE_DETA__BookI__02C769E9" Association="testBookModel.FK__SALE_DETA__BookI__02C769E9">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="SALE_DETAIL" EntitySet="SALE_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE__CustomerID__7C1A6C5A" Association="testBookModel.FK__SALE__CustomerID__7C1A6C5A">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="SALE" EntitySet="SALEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE__UserID__7D0E9093" Association="testBookModel.FK__SALE__UserID__7D0E9093">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="SALE" EntitySet="SALEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALE_DETA__SaleI__01D345B0" Association="testBookModel.FK__SALE_DETA__SaleI__01D345B0">
+            <End Role="SALE" EntitySet="SALEs" />
+            <End Role="SALE_DETAIL" EntitySet="SALE_DETAIL" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -668,6 +782,7 @@
           <Property Name="CustomerTypeID" Type="Int32" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CUSTOMER_TYPE" Relationship="testBookModel.FK_CUSTOMER_CUSTOMER_TYPE" FromRole="CUSTOMER" ToRole="CUSTOMER_TYPE" />
+          <NavigationProperty Name="SALEs" Relationship="testBookModel.FK__SALE__CustomerID__7C1A6C5A" FromRole="CUSTOMER" ToRole="SALE" />
         </EntityType>
         <EntityType Name="CUSTOMER_TYPE">
           <Key>
@@ -710,6 +825,7 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ROLE" Relationship="testBookModel.FK__USERS__RoleID__540C7B00" FromRole="USER" ToRole="ROLE" />
+          <NavigationProperty Name="SALEs" Relationship="testBookModel.FK__SALE__UserID__7D0E9093" FromRole="USER" ToRole="SALE" />
         </EntityType>
         <Association Name="FK__USERS__RoleID__540C7B00">
           <End Type="testBookModel.ROLE" Role="ROLE" Multiplicity="1" />
@@ -735,6 +851,88 @@
         <Association Name="ROLE_PERMISSION">
           <End Type="testBookModel.PERMISSION" Role="PERMISSION" Multiplicity="*" />
           <End Type="testBookModel.ROLE" Role="ROLE" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SALE">
+          <Key>
+            <PropertyRef Name="SaleID" />
+          </Key>
+          <Property Name="SaleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VATAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PaymentMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CUSTOMER" Relationship="testBookModel.FK__SALE__CustomerID__7C1A6C5A" FromRole="SALE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="USER" Relationship="testBookModel.FK__SALE__UserID__7D0E9093" FromRole="SALE" ToRole="USER" />
+          <NavigationProperty Name="SALE_DETAIL" Relationship="testBookModel.FK__SALE_DETA__SaleI__01D345B0" FromRole="SALE" ToRole="SALE_DETAIL" />
+        </EntityType>
+        <EntityType Name="SALE_DETAIL">
+          <Key>
+            <PropertyRef Name="SaleDetailID" />
+          </Key>
+          <Property Name="SaleDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleID" Type="Int32" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DiscountAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VATPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="LineTotal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="BOOK" Relationship="testBookModel.FK__SALE_DETA__BookI__02C769E9" FromRole="SALE_DETAIL" ToRole="BOOK" />
+          <NavigationProperty Name="SALE" Relationship="testBookModel.FK__SALE_DETA__SaleI__01D345B0" FromRole="SALE_DETAIL" ToRole="SALE" />
+        </EntityType>
+        <Association Name="FK__SALE_DETA__BookI__02C769E9">
+          <End Type="testBookModel.BOOK" Role="BOOK" Multiplicity="1" />
+          <End Type="testBookModel.SALE_DETAIL" Role="SALE_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="SALE_DETAIL">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE__CustomerID__7C1A6C5A">
+          <End Type="testBookModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="testBookModel.SALE" Role="SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="SALE">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE__UserID__7D0E9093">
+          <End Type="testBookModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="testBookModel.SALE" Role="SALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SALE">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALE_DETA__SaleI__01D345B0">
+          <End Type="testBookModel.SALE" Role="SALE" Multiplicity="1" />
+          <End Type="testBookModel.SALE_DETAIL" Role="SALE_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALE">
+              <PropertyRef Name="SaleID" />
+            </Principal>
+            <Dependent Role="SALE_DETAIL">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -915,6 +1113,37 @@
               <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="SALEs">
+            <EntityTypeMapping TypeName="testBookModel.SALE">
+              <MappingFragment StoreEntitySet="SALE">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="VATAmount" ColumnName="VATAmount" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SaleCode" ColumnName="SaleCode" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALE_DETAIL">
+            <EntityTypeMapping TypeName="testBookModel.SALE_DETAIL">
+              <MappingFragment StoreEntitySet="SALE_DETAIL">
+                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+                <ScalarProperty Name="VATPercent" ColumnName="VATPercent" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="SaleDetailID" ColumnName="SaleDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

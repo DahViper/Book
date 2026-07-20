@@ -94,6 +94,7 @@ namespace testApp
             .ToList();
             }
             gridControl.DataSource = exportItems;
+            panelControl1.Enabled = false;
             
         }
 
@@ -103,7 +104,7 @@ namespace testApp
         }
 
 
-        private void onNew()
+        private void loadBooks()
         {
             using (testBookEntities db =
                    new testBookEntities())
@@ -407,9 +408,10 @@ namespace testApp
 
                 CurrentExportID = receipt.ExportID;
                 textEdit1.Text = "PX000" + CurrentExportID;
-                textEdit2.Text = receipt.ExportDate.ToString();
-                onNew();
+                textEdit2.Text = receipt.ExportDate.ToString();                
             }
+            loadBooks();
+            panelControl1.Enabled = true;
         }
 
         private void bbiNew_ItemClick(object sender, ItemClickEventArgs e)
@@ -469,7 +471,8 @@ namespace testApp
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            loadBooks();
+            panelControl1.Enabled = true;
         }
 
         private void ApplyPermission()
