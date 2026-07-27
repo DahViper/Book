@@ -71,7 +71,7 @@ namespace testApp
 
         private void LoginTemp_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.F1)
             {
                 userLogin();
             }

@@ -38,40 +38,58 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(142, 220);
+            this.simpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.simpleButton1.Appearance.Options.UseBackColor = true;
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.Location = new System.Drawing.Point(126, 215);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(84, 26);
             this.simpleButton1.TabIndex = 0;
-            this.simpleButton1.Text = "Main";
+            this.simpleButton1.Text = "Confirm";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // textEdit1
             // 
-            this.textEdit1.Location = new System.Drawing.Point(145, 85);
+            this.textEdit1.Location = new System.Drawing.Point(126, 101);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(125, 22);
+            this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(99)))), ((int)(((byte)(126)))));
+            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F);
+            this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit1.Properties.Appearance.Options.UseFont = true;
+            this.textEdit1.Size = new System.Drawing.Size(174, 26);
             this.textEdit1.TabIndex = 1;
             this.textEdit1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit1_KeyUp);
             // 
             // textEdit2
             // 
-            this.textEdit2.Location = new System.Drawing.Point(143, 128);
+            this.textEdit2.Location = new System.Drawing.Point(126, 149);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(125, 22);
+            this.textEdit2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(99)))), ((int)(((byte)(126)))));
+            this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F);
+            this.textEdit2.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit2.Properties.Appearance.Options.UseFont = true;
+            this.textEdit2.Size = new System.Drawing.Size(174, 26);
             this.textEdit2.TabIndex = 2;
             this.textEdit2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit2_KeyUp);
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(232, 220);
+            this.simpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.simpleButton2.Appearance.Options.UseBackColor = true;
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Location = new System.Drawing.Point(216, 215);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(84, 26);
             this.simpleButton2.TabIndex = 0;
-            this.simpleButton2.Text = "Main";
+            this.simpleButton2.Text = "Temp";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // LoginTemp
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(30)))), ((int)(((byte)(72)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 329);
@@ -80,7 +98,7 @@
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
             this.Name = "LoginTemp";
-            this.Text = "Debug";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.LoginTemp_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LoginTemp_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();

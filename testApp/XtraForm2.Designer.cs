@@ -54,60 +54,92 @@
             // 
             this.textEdit1.Location = new System.Drawing.Point(177, 47);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(160, 22);
+            this.textEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit1.Properties.Appearance.Options.UseFont = true;
+            this.textEdit1.Size = new System.Drawing.Size(180, 26);
             this.textEdit1.TabIndex = 0;
             // 
             // textEdit2
             // 
             this.textEdit2.Location = new System.Drawing.Point(177, 82);
             this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(160, 22);
+            this.textEdit2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit2.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit2.Properties.Appearance.Options.UseFont = true;
+            this.textEdit2.Size = new System.Drawing.Size(180, 26);
             this.textEdit2.TabIndex = 1;
             // 
             // textEdit3
             // 
             this.textEdit3.Location = new System.Drawing.Point(177, 117);
             this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Size = new System.Drawing.Size(160, 22);
+            this.textEdit3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.textEdit3.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit3.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit3.Properties.Appearance.Options.UseFont = true;
+            this.textEdit3.Size = new System.Drawing.Size(180, 26);
             this.textEdit3.TabIndex = 1;
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(81, 50);
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseForeColor = true;
+            this.labelControl1.Location = new System.Drawing.Point(61, 50);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(57, 16);
+            this.labelControl1.Size = new System.Drawing.Size(69, 20);
             this.labelControl1.TabIndex = 2;
             this.labelControl1.Text = "Full Name";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(81, 85);
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Appearance.Options.UseForeColor = true;
+            this.labelControl2.Location = new System.Drawing.Point(61, 85);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(84, 16);
+            this.labelControl2.Size = new System.Drawing.Size(105, 20);
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "Phone Number";
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(81, 120);
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl3.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Appearance.Options.UseForeColor = true;
+            this.labelControl3.Location = new System.Drawing.Point(61, 120);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(31, 16);
+            this.labelControl3.Size = new System.Drawing.Size(39, 20);
             this.labelControl3.TabIndex = 2;
             this.labelControl3.Text = "Email";
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(81, 163);
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Appearance.Options.UseForeColor = true;
+            this.labelControl4.Location = new System.Drawing.Point(61, 163);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(41, 16);
+            this.labelControl4.Size = new System.Drawing.Size(50, 20);
             this.labelControl4.TabIndex = 2;
             this.labelControl4.Text = "Gender";
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(81, 198);
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl5.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Appearance.Options.UseForeColor = true;
+            this.labelControl5.Location = new System.Drawing.Point(61, 198);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(71, 16);
+            this.labelControl5.Size = new System.Drawing.Size(90, 20);
             this.labelControl5.TabIndex = 2;
             this.labelControl5.Text = "Date of Birth";
             // 
@@ -116,13 +148,17 @@
             this.radioGroup1.Location = new System.Drawing.Point(177, 155);
             this.radioGroup1.Name = "radioGroup1";
             this.radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.radioGroup1.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.radioGroup1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.radioGroup1.Properties.Appearance.Options.UseBackColor = true;
+            this.radioGroup1.Properties.Appearance.Options.UseFont = true;
+            this.radioGroup1.Properties.Appearance.Options.UseForeColor = true;
             this.radioGroup1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.radioGroup1.Properties.Columns = 2;
             this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Male", true, null, ""),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Female")});
-            this.radioGroup1.Size = new System.Drawing.Size(197, 32);
+            this.radioGroup1.Size = new System.Drawing.Size(217, 32);
             this.radioGroup1.TabIndex = 3;
             // 
             // dateEdit1
@@ -130,27 +166,37 @@
             this.dateEdit1.EditValue = null;
             this.dateEdit1.Location = new System.Drawing.Point(177, 195);
             this.dateEdit1.Name = "dateEdit1";
+            this.dateEdit1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.dateEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.dateEdit1.Properties.Appearance.Options.UseFont = true;
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(160, 22);
+            this.dateEdit1.Size = new System.Drawing.Size(180, 26);
             this.dateEdit1.TabIndex = 4;
             // 
             // simpleButton1
             // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Location = new System.Drawing.Point(177, 296);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(83, 29);
+            this.simpleButton1.Size = new System.Drawing.Size(103, 29);
             this.simpleButton1.TabIndex = 5;
-            this.simpleButton1.Text = "simpleButton1";
+            this.simpleButton1.Text = "Confirm";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(81, 236);
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl6.Appearance.Options.UseFont = true;
+            this.labelControl6.Appearance.Options.UseForeColor = true;
+            this.labelControl6.Location = new System.Drawing.Point(61, 236);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(28, 16);
+            this.labelControl6.Size = new System.Drawing.Size(33, 20);
             this.labelControl6.TabIndex = 2;
             this.labelControl6.Text = "Type";
             // 
@@ -160,7 +206,11 @@
             this.radioGroup2.Location = new System.Drawing.Point(177, 228);
             this.radioGroup2.Name = "radioGroup2";
             this.radioGroup2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.radioGroup2.Properties.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 7.8F, System.Drawing.FontStyle.Bold);
+            this.radioGroup2.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.radioGroup2.Properties.Appearance.Options.UseBackColor = true;
+            this.radioGroup2.Properties.Appearance.Options.UseFont = true;
+            this.radioGroup2.Properties.Appearance.Options.UseForeColor = true;
             this.radioGroup2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.radioGroup2.Properties.Columns = 2;
             this.radioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
@@ -168,11 +218,13 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(2, "Member"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(3, "Vip"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem(4, "Wholesale")});
-            this.radioGroup2.Size = new System.Drawing.Size(197, 54);
+            this.radioGroup2.Size = new System.Drawing.Size(217, 54);
             this.radioGroup2.TabIndex = 3;
             // 
             // XtraForm2
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(99)))), ((int)(((byte)(126)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 354);
@@ -194,6 +246,7 @@
             this.MaximizeBox = false;
             this.Name = "XtraForm2";
             this.Text = "XtraForm2";
+            this.Load += new System.EventHandler(this.XtraForm2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();

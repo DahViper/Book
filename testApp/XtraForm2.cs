@@ -47,5 +47,9 @@ namespace testApp
             }
         }
 
+        private void XtraForm2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

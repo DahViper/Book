@@ -268,12 +268,6 @@
     <Compile Include="SALE_DETAIL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Sale_Product - Copy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sale_Product - Copy.Designer.cs">
-      <DependentUpon>Sale_Product - Copy.cs</DependentUpon>
-    </Compile>
     <Compile Include="USER.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -300,12 +294,6 @@
     </Compile>
     <Compile Include="XtraForm4.Designer.cs">
       <DependentUpon>XtraForm4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Sale_Phone.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sale_Phone.Designer.cs">
-      <DependentUpon>Sale_Phone.cs</DependentUpon>
     </Compile>
     <Compile Include="XtraUserControl1.cs">
       <SubType>UserControl</SubType>
@@ -354,9 +342,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Sale_Product - Copy.resx">
-      <DependentUpon>Sale_Product - Copy.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="XtraForm1.resx">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </EmbeddedResource>
@@ -368,9 +353,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="XtraForm4.resx">
       <DependentUpon>XtraForm4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Sale_Phone.resx">
-      <DependentUpon>Sale_Phone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl1.resx">
       <DependentUpon>XtraUserControl1.cs</DependentUpon>
