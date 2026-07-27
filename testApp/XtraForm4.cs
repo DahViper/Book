@@ -58,65 +58,9 @@ namespace testApp
                     b.BookID,
                     b.Title,
                 }).ToList();
-                searchLookUpEdit1.Properties.DataSource = books;
-                searchLookUpEdit1.Properties.DisplayMember = "Title";
-                searchLookUpEdit1.Properties.ValueMember = "BookId";
-                searchLookUpEdit1.Properties.PopulateViewColumns();
             }
         }
 
-        private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-            object value = searchLookUpEdit1.Properties.View.GetFocusedRowCellValue("BookID");
-
-            if (value == null) return;
-
-            int bookId = Convert.ToInt32(value);
-            BOOK selected = _books.FirstOrDefault(b => b.BookID == bookId);
-            if (selected != null)
-            {
-                textEdit9.EditValue = selected.BookID;
-                textEdit10.Text = selected.ISBN;
-                spinEdit1.Properties.MaxValue = Convert.ToInt32(selected.StockQuantity);
-                spinEdit1.EditValue = spinEdit1.Properties.MinValue;
-            }
-        }
-
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-            object value = searchLookUpEdit1.Properties.View.GetFocusedRowCellValue("BookID");
-
-            if (value == null) return;
-
-            int bookId = Convert.ToInt32(value);
-            BOOK selected = _books.FirstOrDefault(b => b.BookID == bookId);
-            if (selected != null && Convert.ToInt32(spinEdit1.EditValue) != 0)
-            {
-                var existing = saleItems.FirstOrDefault(x => x.BookID == bookId);
-
-                if (existing != null)
-                {
-
-                    existing.Quantity += Convert.ToInt32(spinEdit1.EditValue);
-                    if (existing.Quantity >= selected.StockQuantity)
-                        existing.Quantity = Convert.ToInt32(selected.StockQuantity);
-
-                    gridView1.RefreshData();
-                }
-                else
-                    saleItems.Add(new SaleItem
-                    {
-                        BookID = selected.BookID,
-                        ISBN = selected.ISBN,
-                        Title = selected.Title,
-                        Quantity = Convert.ToInt32(spinEdit1.EditValue),
-                        UnitPrice = selected.RetailPrice,
-                        VATPercent = selected.VatOutPercent
-
-                    });
-                countTotal();
-            }
-        }
 
         private void XtraForm4_Load(object sender, EventArgs e)
         {
@@ -162,33 +106,15 @@ namespace testApp
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            int bookID = Convert.ToInt32(gridView2.GetFocusedRowCellValue("BookID"));
-            DialogResult result = XtraMessageBox.Show(
-        "Remove this item?",
-        "Confirm",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-            {
-                using (testBookEntities db = new testBookEntities())
-                {
-                    var item = saleItems.FirstOrDefault(x => x.BookID == bookID);
-
-                    if (item != null)
-                    {
-                        saleItems.Remove(item);
-                        gridControl2.Refresh();
-                    }
-                }
-                countTotal();
-            }
-
+            int lastIndex = saleItems.Count -1;
+            saleItems.RemoveAt(lastIndex);
+            gridView2.RefreshData();
+            countTotal();
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            using (XtraForm5 form5 = new XtraForm5())
+            using (Sale_Phone form5 = new Sale_Phone())
             {
                 if (form5.ShowDialog() == DialogResult.OK)
                 {
@@ -207,5 +133,187 @@ namespace testApp
             }
         }
 
+        private void XtraForm4_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    simpleButton1_Click(this, new EventArgs());
+                    break;
+
+                case Keys.F2:
+                    simpleButton3_Click(this, new EventArgs());
+                    break;
+
+                case Keys.F3:
+                    break;
+
+                case Keys.F4:
+                    break;
+
+                case Keys.F5:
+                    panelControl4.Visible = true;
+                    textEdit6.Focus();
+                    //simpleButton5_Click(this, new EventArgs());
+                    break;
+
+                case Keys.F6:
+                    break;
+
+
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            using (Sale_Product form5 = new Sale_Product())
+            {
+                if (form5.ShowDialog() == DialogResult.OK)
+                {
+                    string product = form5.productCode;
+                    string amount = form5.quantity;
+
+                    using (testBookEntities db = new testBookEntities())
+                    {
+                        BOOK selected = db.BOOKs.FirstOrDefault(x => x.BookID.ToString() == product);
+                        if (selected != null)
+                        {
+                            saleItems.Add(new SaleItem
+                            {
+                                BookID = selected.BookID,
+                                ISBN = selected.ISBN,
+                                Title = selected.Title,
+                                Quantity = Convert.ToInt32(amount),
+                                UnitPrice = selected.RetailPrice,
+                                VATPercent = selected.VatOutPercent
+
+                            });
+                        }
+                        countTotal();
+                    }
+                }
+
+            }
+        }
+
+        private void CompleteSale()
+        {
+            if (saleItems.Count == 0)
+            {
+                XtraMessageBox.Show(
+                    "Please add at least one book.");
+
+                return;
+            }
+
+            using (var db = new testBookEntities())
+            using (var transaction =
+                   db.Database.BeginTransaction())
+            {
+                try
+                {
+                    SALE sale = new SALE();
+
+                    //sale.SaleCode = GenerateSaleCode();
+
+                    //sale.CustomerID = selectedCustomerID;
+
+                    sale.UserID =
+                        UserSession.CurrentUser.UserID;
+
+                    sale.SaleDate = DateTime.Now;
+
+                    //sale.PaymentMethod = cboPaymentMethod.Text;
+
+                    sale.Subtotal =
+                        saleItems.Sum(x => x.LineTotal);
+
+                    //sale.TotalAmount = sale.Subtotal - discountAmount + vatAmount;
+
+                    sale.Status = "Completed";
+
+                    db.SALEs.Add(sale);
+
+                    foreach (var item in saleItems)
+                    {
+                        BOOK book =
+                            db.BOOKs.Find(item.BookID);
+
+                        if (book == null)
+                        {
+                            throw new Exception(
+                                "Book not found.");
+                        }
+
+                        if (book.StockQuantity < item.Quantity)
+                        {
+                            throw new Exception(
+                                $"Not enough stock for {book.Title}.");
+                        }
+
+                        SALE_DETAIL detail =
+                            new SALE_DETAIL();
+
+                        detail.BookID = item.BookID;
+                        detail.Quantity = item.Quantity;
+                        detail.UnitPrice = item.UnitPrice;
+                        detail.VATPercent =
+                            item.VATPercent;
+
+                        detail.LineTotal =
+                            item.LineTotal;
+
+                        sale.SALE_DETAIL.Add(detail);
+
+                        book.StockQuantity -= item.Quantity;
+                    }
+
+                    db.SaveChanges();
+
+                    transaction.Commit();
+
+                    XtraMessageBox.Show(
+                        "Sale completed successfully.");
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+
+                    XtraMessageBox.Show(
+                        ex.Message);
+                }
+            }
+        }
+
+
+        private void simpleButton17_Click(object sender, EventArgs e)
+        {
+            string phone = textEdit6.Text;
+            using (testBookEntities db = new testBookEntities())
+            {
+                CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(x => x.PhoneNumber == phone);
+                if (customer != null)
+                {
+                    textEdit3.Text = (customer.CUSTOMER_TYPE.DiscountPercent).ToString();
+                }
+                else
+                {
+                    XtraMessageBox.Show(
+                    "Not existing customer.");
+
+                    return;
+                }
+                    countTotal();
+            }
+        }
+
+        private void textEdit6_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                simpleButton17_Click(this, new EventArgs());
+            }
+
+        }
     }
 }

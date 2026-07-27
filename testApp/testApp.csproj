@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="Azure.Core, Version=1.50.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Core.1.50.0\lib\net472\Azure.Core.dll</HintPath>
     </Reference>
@@ -121,12 +122,14 @@
       <HintPath>..\packages\System.ClientModel.1.8.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -155,6 +158,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
@@ -182,6 +186,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -263,6 +268,12 @@
     <Compile Include="SALE_DETAIL.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Sale_Product - Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sale_Product - Copy.Designer.cs">
+      <DependentUpon>Sale_Product - Copy.cs</DependentUpon>
+    </Compile>
     <Compile Include="USER.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -290,11 +301,11 @@
     <Compile Include="XtraForm4.Designer.cs">
       <DependentUpon>XtraForm4.cs</DependentUpon>
     </Compile>
-    <Compile Include="XtraForm5.cs">
+    <Compile Include="Sale_Phone.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="XtraForm5.Designer.cs">
-      <DependentUpon>XtraForm5.cs</DependentUpon>
+    <Compile Include="Sale_Phone.Designer.cs">
+      <DependentUpon>Sale_Phone.cs</DependentUpon>
     </Compile>
     <Compile Include="XtraUserControl1.cs">
       <SubType>UserControl</SubType>
@@ -343,6 +354,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sale_Product - Copy.resx">
+      <DependentUpon>Sale_Product - Copy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="XtraForm1.resx">
       <DependentUpon>XtraForm1.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,8 +369,8 @@
     <EmbeddedResource Include="XtraForm4.resx">
       <DependentUpon>XtraForm4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="XtraForm5.resx">
-      <DependentUpon>XtraForm5.cs</DependentUpon>
+    <EmbeddedResource Include="Sale_Phone.resx">
+      <DependentUpon>Sale_Phone.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl1.resx">
       <DependentUpon>XtraUserControl1.cs</DependentUpon>

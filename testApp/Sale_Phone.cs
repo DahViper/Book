@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace testApp
 {
-    public partial class XtraForm5 : DevExpress.XtraEditors.XtraForm
+    public partial class Sale_Phone : DevExpress.XtraEditors.XtraForm
     {
         public string phoneNum {  get; private set; }
-        public XtraForm5()
+        public Sale_Phone()
         {
             InitializeComponent();
         }
@@ -24,6 +24,14 @@ namespace testApp
             phoneNum = textEdit1.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void textEdit1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                simpleButton1_Click(this, new EventArgs());
+            }
         }
     }
 }
