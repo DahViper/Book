@@ -1395,11 +1395,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 561);
-            this.Controls.Add(this.panelControl6);
             this.Controls.Add(this.gridControl2);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.panelControl6);
             this.Name = "XtraForm4";
             this.Text = "XtraForm4";
             this.Load += new System.EventHandler(this.XtraForm4_Load);

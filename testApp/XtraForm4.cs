@@ -43,6 +43,7 @@ namespace testApp
         private BindingList<SaleItem> saleItems = new BindingList<SaleItem>();
         private List<BOOK> _books;
         private Control lastInputControl;
+        private bool inSale;
         public XtraForm4()
         {
             InitializeComponent();
@@ -130,6 +131,10 @@ namespace testApp
 
         private void XtraForm4_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (inSale == true) panelControl6.Visible = false;
+            }
             //switch (e.KeyCode)
             //{
             //    case Keys.F1:
@@ -416,9 +421,16 @@ namespace testApp
                     simpleButton5_Click(this, new EventArgs());
                     return true;
 
-                case Keys.F6:
+                case Keys.F7:
                     simpleButton35_Click(this, new EventArgs());
                     return true;
+
+                case Keys.Escape:
+                    if (inSale == true)
+                    {
+                        panelControl6.Visible = false;
+                    }
+                    break;
             }
 
             // Let the form process everything else normally
@@ -429,6 +441,7 @@ namespace testApp
         {
             textEdit9.Text = textEdit4.Text;
             panelControl6.Visible = true;
+            inSale = true;
             textEdit10.Clear();
             textEdit10.Focus();
         }
@@ -450,6 +463,7 @@ namespace testApp
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
             panelControl6.Visible= false;
+            inSale = false;
         }
 
         private void textEdit_Enter(object sender, EventArgs e)

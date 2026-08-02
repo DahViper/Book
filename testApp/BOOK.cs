@@ -39,6 +39,9 @@ namespace testApp
         public decimal WholesalePrice { get; set; }
         public decimal VatOutPercent { get; set; }
         public decimal RetailPrice { get; set; }
+        public decimal PromotionPercent { get; set; }
+        public Nullable<System.DateTime> PromotionStart { get; set; }
+        public Nullable<System.DateTime> PromotionEnd { get; set; }
     
         public virtual AUTHOR AUTHOR { get; set; }
         public virtual CATEGORY CATEGORY { get; set; }

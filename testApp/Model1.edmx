@@ -31,6 +31,9 @@
           <Property Name="WholesalePrice" Type="decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="VatOutPercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="RetailPrice" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PromotionPercent" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PromotionStart" Type="date" />
+          <Property Name="PromotionEnd" Type="date" />
         </EntityType>
         <EntityType Name="BOOK_AUTHOR">
           <Key>
@@ -193,6 +196,22 @@
           <Property Name="PasswordHash" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoucherCode" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DiscountType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DiscountValue" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MinimumSubtotal" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MaximumDiscount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="UsageLimit" Type="int" />
+          <Property Name="UsedCount" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
@@ -429,6 +448,7 @@
           <EntitySet Name="SALE" EntityType="Self.SALE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SALE_DETAIL" EntityType="Self.SALE_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BOOK__AuthorID__4D94879B" Association="Self.FK__BOOK__AuthorID__4D94879B">
             <End Role="AUTHOR" EntitySet="AUTHOR" />
             <End Role="BOOK" EntitySet="BOOK" />
@@ -541,6 +561,9 @@
           <NavigationProperty Name="EXPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__EXPORT_RE__BookI__17036CC0" FromRole="BOOK" ToRole="EXPORT_RECEIPT_DETAIL" />
           <NavigationProperty Name="IMPORT_RECEIPT_DETAIL" Relationship="testBookModel.FK__IMPORT_RE__BookI__05D8E0BE" FromRole="BOOK" ToRole="IMPORT_RECEIPT_DETAIL" />
           <NavigationProperty Name="SALE_DETAIL" Relationship="testBookModel.FK__SALE_DETA__BookI__02C769E9" FromRole="BOOK" ToRole="SALE_DETAIL" />
+          <Property Name="PromotionPercent" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PromotionStart" Type="DateTime" Precision="0" />
+          <Property Name="PromotionEnd" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
@@ -626,6 +649,7 @@
             <End Role="SALE" EntitySet="SALEs" />
             <End Role="SALE_DETAIL" EntitySet="SALE_DETAIL" />
           </AssociationSet>
+          <EntitySet Name="VOUCHERs" EntityType="testBookModel.VOUCHER" />
         </EntityContainer>
         <Association Name="FK__BOOK__AuthorID__4D94879B">
           <End Type="testBookModel.AUTHOR" Role="AUTHOR" Multiplicity="0..1" />
@@ -934,6 +958,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="VoucherID" />
+          </Key>
+          <Property Name="VoucherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoucherCode" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DiscountType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountValue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MinimumSubtotal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="MaximumDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UsageLimit" Type="Int32" />
+          <Property Name="UsedCount" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -951,6 +991,9 @@
           <EntitySetMapping Name="BOOKs">
             <EntityTypeMapping TypeName="testBookModel.BOOK">
               <MappingFragment StoreEntitySet="BOOK">
+                <ScalarProperty Name="PromotionEnd" ColumnName="PromotionEnd" />
+                <ScalarProperty Name="PromotionStart" ColumnName="PromotionStart" />
+                <ScalarProperty Name="PromotionPercent" ColumnName="PromotionPercent" />
                 <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
                 <ScalarProperty Name="VatOutPercent" ColumnName="VatOutPercent" />
                 <ScalarProperty Name="WholesalePrice" ColumnName="WholesalePrice" />
@@ -1141,6 +1184,23 @@
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="SaleID" ColumnName="SaleID" />
                 <ScalarProperty Name="SaleDetailID" ColumnName="SaleDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOUCHERs">
+            <EntityTypeMapping TypeName="testBookModel.VOUCHER">
+              <MappingFragment StoreEntitySet="VOUCHER">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UsedCount" ColumnName="UsedCount" />
+                <ScalarProperty Name="UsageLimit" ColumnName="UsageLimit" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="MaximumDiscount" ColumnName="MaximumDiscount" />
+                <ScalarProperty Name="MinimumSubtotal" ColumnName="MinimumSubtotal" />
+                <ScalarProperty Name="DiscountValue" ColumnName="DiscountValue" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="VoucherID" ColumnName="VoucherID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

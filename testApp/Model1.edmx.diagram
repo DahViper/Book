@@ -34,6 +34,7 @@
         <AssociationConnector Association="testBookModel.FK__SALE__CustomerID__7C1A6C5A" />
         <AssociationConnector Association="testBookModel.FK__SALE__UserID__7D0E9093" />
         <AssociationConnector Association="testBookModel.FK__SALE_DETA__SaleI__01D345B0" />
+        <EntityTypeShape EntityType="testBookModel.VOUCHER" Width="1.5" PointX="9.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
