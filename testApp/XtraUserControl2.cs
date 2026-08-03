@@ -349,7 +349,6 @@ namespace testApp
                 db.SaveChanges();
                 XtraMessageBox.Show("Draft Saved successfully");
                 barButtonItem1.Enabled = false;
-                barButtonItem2.Enabled = true;
             }
         }
 
@@ -390,7 +389,6 @@ namespace testApp
                 receipt.Status = "Approved";
 
                 db.SaveChanges();
-                barButtonItem2.Enabled = true;
             }
         }
 
@@ -488,6 +486,26 @@ namespace testApp
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
             ApproveReceipt();
+        }
+
+        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void gridControl1_FocusedViewChanged(object sender, ViewFocusEventArgs e)
+        {
+            object value = gridView1.GetFocusedRowCellValue("Status");
+            if (value != null) return;
+            string status = value.ToString();
+            if (status == "Draft")
+            {
+                if (PermissionService.Has("EXPORT_APPROVE"))
+                {
+                    barButtonItem1.Enabled = true;
+                }
+                else barButtonItem1.Enabled = false;
+            }
         }
     }
     

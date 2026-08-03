@@ -316,6 +316,12 @@
     <Compile Include="XtraUserControl3.Designer.cs">
       <DependentUpon>XtraUserControl3.cs</DependentUpon>
     </Compile>
+    <Compile Include="XtraUserControl7.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl7.Designer.cs">
+      <DependentUpon>XtraUserControl7.cs</DependentUpon>
+    </Compile>
     <Compile Include="XtraUserControl6.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -371,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl3.resx">
       <DependentUpon>XtraUserControl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl7.resx">
+      <DependentUpon>XtraUserControl7.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XtraUserControl6.resx">
       <DependentUpon>XtraUserControl6.cs</DependentUpon>
@@ -429,6 +438,10 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\actions_checkcircled1.svg" />
+    <None Include="Resources\shopping_cashvoucher.svg" />
+    <None Include="Resources\bo_sale_item.svg" />
+    <None Include="Resources\bo_user.svg" />
     <None Include="Resources\actions_user.svg" />
     <None Include="Resources\save1.svg" />
     <None Include="Resources\actions_checkcircled.svg" />

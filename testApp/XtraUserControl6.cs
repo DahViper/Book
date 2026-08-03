@@ -136,7 +136,7 @@ namespace testApp
 
         private void dateEdit1_EditValueChanged(object sender, EventArgs e)
         {
-            discount = Convert.ToInt32(textEdit3.Text);
+            discount = Convert.ToDecimal(textEdit3.Text);
             pStart = dateEdit1.EditValue as DateTime?;
             pEnd = dateEdit2.EditValue as DateTime?;
         }

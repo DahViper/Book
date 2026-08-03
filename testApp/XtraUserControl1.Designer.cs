@@ -169,6 +169,7 @@ namespace testApp
             // 
             // bbiUpdate
             // 
+            this.bbiUpdate.Caption = "Refresh";
             this.bbiUpdate.Id = 14;
             this.bbiUpdate.ImageOptions.ImageUri.Uri = "Preview";
             this.bbiUpdate.ImageOptions.SvgImage = global::testApp.Properties.Resources.actions_refresh;
@@ -193,6 +194,7 @@ namespace testApp
             // 
             // bbiEdit
             // 
+            this.bbiEdit.Caption = "Edit";
             this.bbiEdit.Id = 17;
             this.bbiEdit.ImageOptions.Image = global::testApp.Properties.Resources.convert_32x32;
             this.bbiEdit.ImageOptions.ImageUri.Uri = "Edit";
@@ -250,6 +252,7 @@ namespace testApp
             this.ribbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonPageGroup1.ItemLinks.Add(this.bbiNew);
             this.ribbonPageGroup1.ItemLinks.Add(this.bbiDelete);
+            this.ribbonPageGroup1.ItemLinks.Add(this.bbiEdit);
             this.ribbonPageGroup1.ItemsLayout = DevExpress.XtraBars.Ribbon.RibbonPageGroupItemsLayout.OneRow;
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
@@ -263,7 +266,6 @@ namespace testApp
             // 
             // ribbonPageGroup3
             // 
-            this.ribbonPageGroup3.ItemLinks.Add(this.bbiEdit);
             this.ribbonPageGroup3.ItemLinks.Add(this.bbiUpdate);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             // 

@@ -35,15 +35,40 @@ namespace testApp
             {
                 get
                 {
-                    return Quantity * UnitPrice*(1+ VATPercent/100);
+                    return Quantity * UnitPrice;
                 }
             }
+
+            
+            public decimal Discount { get; set; }
+            public decimal DiscountAmount
+            {
+                get
+                {
+                    return LineTotal * Discount / 100m;
+                }
+            }
+            public decimal Total
+            {
+                get
+                {
+                    return LineTotal - DiscountAmount;
+                }
+            }
+
         }
 
         private BindingList<SaleItem> saleItems = new BindingList<SaleItem>();
         private List<BOOK> _books;
         private Control lastInputControl;
         private bool inSale;
+        private decimal subtotal;
+        private decimal lineDiscount;
+        private decimal invoiceDiscount;
+        private decimal memberDiscountPercent;
+        private decimal memberDiscount;
+        private decimal finalTotal;
+        private int totalQuantity;
         public XtraForm4()
         {
             InitializeComponent();
@@ -83,13 +108,20 @@ namespace testApp
         private void countTotal()
         {
 
-            var subtotal = saleItems.Sum(x => x.LineTotal);
-            textEdit2.Text = subtotal.ToString();
+            subtotal = saleItems.Sum(x => x.LineTotal);
             textEdit1.Text = (saleItems.Sum(x => x.Quantity)).ToString();
-            double.TryParse(textEdit2.Text, out double num1);
-            double.TryParse(textEdit3.Text, out double num2);
-            double total = num1 * (1 - num2 / 100);
-            textEdit4.Text = total.ToString();
+            textEdit2.Text = subtotal.ToString();
+            totalQuantity = (saleItems.Sum(x => x.Quantity));
+            lineDiscount = (saleItems.Sum(x => x.DiscountAmount));
+            textEdit13.Text = lineDiscount.ToString();
+            memberDiscount = subtotal * memberDiscountPercent / 100m;
+            
+
+            finalTotal = subtotal - lineDiscount - memberDiscount - invoiceDiscount;
+
+
+            
+            textEdit4.Text = finalTotal.ToString();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -129,42 +161,6 @@ namespace testApp
             textEdit6.Clear();
         }
 
-        private void XtraForm4_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                if (inSale == true) panelControl6.Visible = false;
-            }
-            //switch (e.KeyCode)
-            //{
-            //    case Keys.F1:
-            //        panelControl5.Visible = true;
-            //        textEdit8.Focus();
-            //        //simpleButton1_Click(this, new EventArgs());
-            //        break;
-
-            //    case Keys.F2:
-            //        simpleButton3_Click(this, new EventArgs());
-            //        break;
-
-            //    case Keys.F3:
-            //        break;
-
-            //    case Keys.F4:
-            //        break;
-
-            //    case Keys.F5:
-            //        panelControl4.Visible = true;
-            //        textEdit6.Focus();
-            //        //simpleButton5_Click(this, new EventArgs());
-            //        break;
-
-            //    case Keys.F6:
-            //        break;
-
-
-            //}
-        }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
@@ -276,7 +272,12 @@ namespace testApp
                 CUSTOMER customer = db.CUSTOMERs.FirstOrDefault(x => x.PhoneNumber == phone);
                 if (customer != null)
                 {
-                    textEdit3.Text = (customer.CUSTOMER_TYPE.DiscountPercent).ToString();
+                    memberDiscountPercent = customer.CUSTOMER_TYPE.DiscountPercent;
+                    memberDiscount = subtotal * memberDiscountPercent / 100m;
+
+                    textEdit3.Text = memberDiscount.ToString();
+                    textEdit15.Text = memberDiscountPercent.ToString();
+
                     textEdit5.Text = customer.FullName;
                 }
                 else
@@ -286,6 +287,7 @@ namespace testApp
 
                     return;
                 }
+
                 countTotal();
                 panelControl4.Visible = false;
             }
@@ -302,12 +304,12 @@ namespace testApp
 
         private void simpleButton18_Click(object sender, EventArgs e)
         {
-            string product = textEdit7.Text;
+            int product = Convert.ToInt32(textEdit7.Text);
             string amount = textEdit8.Text;
 
             using (testBookEntities db = new testBookEntities())
             {
-                BOOK selected = db.BOOKs.FirstOrDefault(x => x.BookID.ToString() == product);
+                BOOK selected = db.BOOKs.Find(product);
                 if (selected != null)
                 {
                     saleItems.Add(new SaleItem
@@ -317,10 +319,10 @@ namespace testApp
                         Title = selected.Title,
                         Quantity = Convert.ToInt32(amount),
                         UnitPrice = selected.RetailPrice,
-                        VATPercent = selected.VatOutPercent
-
+                        Discount = selected.PromotionPercent                     
                     });
                 }
+                
                 countTotal();
                 panelControl5.Visible = false;
             }
@@ -469,6 +471,64 @@ namespace testApp
         private void textEdit_Enter(object sender, EventArgs e)
         {
             lastInputControl = sender as Control;
+        }
+
+        private void simpleButton36_Click(object sender, EventArgs e)
+        {
+            panelControl4.Visible = false;
+            panelControl5.Visible = false;
+            panelControl7.Visible = false;
+
+            panelControl7.Visible = true;
+            textEdit11.Clear();
+            textEdit6.Focus();
+        }
+
+        private decimal ApplyVoucher(string code, decimal subtotal)
+        {
+            using (var db = new testBookEntities())
+            {
+                var voucher = db.VOUCHERs.FirstOrDefault(v =>
+                    v.VoucherCode == code &&
+                    //v.IsActive &&
+                    v.StartDate <= DateTime.Today &&
+                    v.EndDate >= DateTime.Today);
+
+                if (voucher == null)
+                    throw new Exception("Invalid voucher");
+
+                if (subtotal < voucher.MinimumSubtotal)
+                    throw new Exception("Minimum purchase not reached");
+
+                decimal discount = 0;
+
+                if (voucher.DiscountType == "Percent")
+                {
+                    discount = subtotal * voucher.DiscountValue / 100m;
+                }
+                else
+                {
+                    discount = voucher.DiscountValue;
+                }
+
+                if (voucher.MaximumDiscount != null)
+                {
+                    discount = Math.Min(discount, voucher.MaximumDiscount.Value);
+                }
+
+                return discount;
+            }
+        }
+
+
+        private void simpleButton37_Click(object sender, EventArgs e)
+        {
+            var voucher = textEdit11.Text;
+            if (voucher == null) return;
+            invoiceDiscount = ApplyVoucher(voucher, subtotal);
+            textEdit14.Text = invoiceDiscount.ToString();
+            countTotal();
+            panelControl7.Visible = false;
         }
     }
 }

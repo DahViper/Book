@@ -32,6 +32,7 @@ namespace testApp
         private void Form1_Load(object sender, EventArgs e)
         {
             ApplyPermission();
+            Text = $"Main Form - {UserSession.CurrentUser.FullName} - {UserSession.CurrentUser.ROLE.RoleName}";
             //LoadBooks();
             //LoadCategories2();
             //LoadAuthor();
@@ -45,13 +46,13 @@ namespace testApp
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
-            documentManager1.View.AddDocument("Import", "XtraUserControl2");
+            documentManager1.View.AddDocument("Export", "XtraUserControl2");
             documentManager1.View.AddDocument(new XtraUserControl2());
         }
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            documentManager1.View.AddDocument("Export", "XtraUserControl3");
+            documentManager1.View.AddDocument("Import", "XtraUserControl3");
             documentManager1.View.AddDocument(new XtraUserControl3());
         }
 
@@ -71,9 +72,21 @@ namespace testApp
         private void ApplyPermission()
         {
             barButtonItem1.Enabled = PermissionService.Has("BOOK_VIEW");
-            barButtonItem2.Enabled = PermissionService.Has("IMPORT_VIEW");
-            barButtonItem3.Enabled = PermissionService.Has("EXPORT_VIEW");
-            barButtonItem4.Enabled = PermissionService.Has("CUSTOMER_VIEW");
+            barButtonItem3.Enabled = PermissionService.Has("IMPORT_VIEW");
+            barButtonItem4.Enabled = PermissionService.Has("EXPORT_VIEW");
+            barButtonItem5.Enabled = PermissionService.Has("CUSTOMER_VIEW");
+        }
+
+        private void barButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("User", "XtraUserControl6");
+            documentManager1.View.AddDocument(new XtraUserControl6());
+        }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            documentManager1.View.AddDocument("User", "XtraUserControl7");
+            documentManager1.View.AddDocument(new XtraUserControl7());
         }
     }
 }

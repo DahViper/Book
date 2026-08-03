@@ -34,6 +34,10 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.simpleButton37 = new DevExpress.XtraEditors.SimpleButton();
+            this.textEdit11 = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton18 = new DevExpress.XtraEditors.SimpleButton();
             this.textEdit8 = new DevExpress.XtraEditors.TextEdit();
@@ -67,7 +71,7 @@
             this.simpleButton9 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
             this.customerButton = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton36 = new DevExpress.XtraEditors.SimpleButton();
             this.removeButton = new DevExpress.XtraEditors.SimpleButton();
             this.addButton = new DevExpress.XtraEditors.SimpleButton();
             this.creditButton = new DevExpress.XtraEditors.SimpleButton();
@@ -123,12 +127,20 @@
             this.textEdit9 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit13 = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
+            this.textEdit14 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit15 = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
@@ -176,6 +188,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit10.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit15.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl2
@@ -215,6 +230,7 @@
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(30)))), ((int)(((byte)(72)))));
             this.panelControl1.Appearance.Options.UseBackColor = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl1.Controls.Add(this.panelControl7);
             this.panelControl1.Controls.Add(this.panelControl5);
             this.panelControl1.Controls.Add(this.panelControl4);
             this.panelControl1.Controls.Add(this.labelControl5);
@@ -224,6 +240,58 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(906, 122);
             this.panelControl1.TabIndex = 0;
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(99)))), ((int)(((byte)(136)))));
+            this.panelControl7.Appearance.Options.UseBackColor = true;
+            this.panelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl7.Controls.Add(this.simpleButton37);
+            this.panelControl7.Controls.Add(this.textEdit11);
+            this.panelControl7.Controls.Add(this.labelControl11);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl7.Location = new System.Drawing.Point(0, -55);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(906, 59);
+            this.panelControl7.TabIndex = 4;
+            this.panelControl7.Visible = false;
+            // 
+            // simpleButton37
+            // 
+            this.simpleButton37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton37.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.simpleButton37.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton37.Appearance.Options.UseBackColor = true;
+            this.simpleButton37.Appearance.Options.UseFont = true;
+            this.simpleButton37.Location = new System.Drawing.Point(767, 16);
+            this.simpleButton37.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.simpleButton37.Name = "simpleButton37";
+            this.simpleButton37.Size = new System.Drawing.Size(97, 29);
+            this.simpleButton37.TabIndex = 2;
+            this.simpleButton37.Text = "Confirm";
+            this.simpleButton37.Click += new System.EventHandler(this.simpleButton37_Click);
+            // 
+            // textEdit11
+            // 
+            this.textEdit11.Location = new System.Drawing.Point(172, 17);
+            this.textEdit11.Name = "textEdit11";
+            this.textEdit11.Properties.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit11.Properties.Appearance.Options.UseFont = true;
+            this.textEdit11.Size = new System.Drawing.Size(206, 26);
+            this.textEdit11.TabIndex = 1;
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl11.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl11.Appearance.Options.UseFont = true;
+            this.labelControl11.Appearance.Options.UseForeColor = true;
+            this.labelControl11.Location = new System.Drawing.Point(23, 19);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(37, 20);
+            this.labelControl11.TabIndex = 0;
+            this.labelControl11.Text = "Code:";
             // 
             // panelControl5
             // 
@@ -248,16 +316,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.simpleButton18.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
             this.simpleButton18.Appearance.BorderColor = System.Drawing.Color.Transparent;
-            this.simpleButton18.Appearance.Font = new System.Drawing.Font("Tahoma", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton18.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.simpleButton18.Appearance.ForeColor = System.Drawing.Color.White;
             this.simpleButton18.Appearance.Options.UseBackColor = true;
             this.simpleButton18.Appearance.Options.UseBorderColor = true;
             this.simpleButton18.Appearance.Options.UseFont = true;
             this.simpleButton18.Appearance.Options.UseForeColor = true;
-            this.simpleButton18.Location = new System.Drawing.Point(738, 17);
+            this.simpleButton18.Location = new System.Drawing.Point(767, 17);
             this.simpleButton18.LookAndFeel.UseDefaultLookAndFeel = false;
             this.simpleButton18.Name = "simpleButton18";
-            this.simpleButton18.Size = new System.Drawing.Size(126, 31);
+            this.simpleButton18.Size = new System.Drawing.Size(97, 31);
             this.simpleButton18.TabIndex = 2;
             this.simpleButton18.Text = "Confirm";
             this.simpleButton18.Click += new System.EventHandler(this.simpleButton18_Click);
@@ -266,9 +334,9 @@
             // 
             this.textEdit8.Location = new System.Drawing.Point(482, 14);
             this.textEdit8.Name = "textEdit8";
-            this.textEdit8.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit8.Properties.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEdit8.Properties.Appearance.Options.UseFont = true;
-            this.textEdit8.Size = new System.Drawing.Size(127, 34);
+            this.textEdit8.Size = new System.Drawing.Size(127, 26);
             this.textEdit8.TabIndex = 1;
             this.textEdit8.Enter += new System.EventHandler(this.textEdit_Enter);
             this.textEdit8.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit8_KeyUp);
@@ -277,34 +345,34 @@
             // 
             this.textEdit7.Location = new System.Drawing.Point(129, 14);
             this.textEdit7.Name = "textEdit7";
-            this.textEdit7.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit7.Properties.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEdit7.Properties.Appearance.Options.UseFont = true;
-            this.textEdit7.Size = new System.Drawing.Size(206, 34);
+            this.textEdit7.Size = new System.Drawing.Size(206, 26);
             this.textEdit7.TabIndex = 1;
             this.textEdit7.Enter += new System.EventHandler(this.textEdit_Enter);
             this.textEdit7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit7_KeyUp);
             // 
             // labelControl8
             // 
-            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl8.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Appearance.Options.UseForeColor = true;
             this.labelControl8.Location = new System.Drawing.Point(377, 17);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(100, 28);
+            this.labelControl8.Size = new System.Drawing.Size(59, 20);
             this.labelControl8.TabIndex = 0;
             this.labelControl8.Text = "Amount:";
             // 
             // labelControl7
             // 
-            this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl7.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl7.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl7.Appearance.Options.UseFont = true;
             this.labelControl7.Appearance.Options.UseForeColor = true;
             this.labelControl7.Location = new System.Drawing.Point(25, 17);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(98, 28);
+            this.labelControl7.Size = new System.Drawing.Size(57, 20);
             this.labelControl7.TabIndex = 0;
             this.labelControl7.Text = "Product:";
             // 
@@ -328,37 +396,37 @@
             this.simpleButton17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.simpleButton17.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
-            this.simpleButton17.Appearance.Font = new System.Drawing.Font("Tahoma", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButton17.Appearance.Font = new System.Drawing.Font("Montserrat ExtraBold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.simpleButton17.Appearance.Options.UseBackColor = true;
             this.simpleButton17.Appearance.Options.UseFont = true;
-            this.simpleButton17.Location = new System.Drawing.Point(738, 16);
+            this.simpleButton17.Location = new System.Drawing.Point(767, 16);
             this.simpleButton17.LookAndFeel.UseDefaultLookAndFeel = false;
             this.simpleButton17.Name = "simpleButton17";
-            this.simpleButton17.Size = new System.Drawing.Size(126, 29);
+            this.simpleButton17.Size = new System.Drawing.Size(97, 29);
             this.simpleButton17.TabIndex = 2;
             this.simpleButton17.Text = "Confirm";
             this.simpleButton17.Click += new System.EventHandler(this.simpleButton17_Click);
             // 
             // textEdit6
             // 
-            this.textEdit6.Location = new System.Drawing.Point(172, 13);
+            this.textEdit6.Location = new System.Drawing.Point(172, 17);
             this.textEdit6.Name = "textEdit6";
-            this.textEdit6.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEdit6.Properties.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEdit6.Properties.Appearance.Options.UseFont = true;
-            this.textEdit6.Size = new System.Drawing.Size(206, 34);
+            this.textEdit6.Size = new System.Drawing.Size(206, 26);
             this.textEdit6.TabIndex = 1;
             this.textEdit6.Enter += new System.EventHandler(this.textEdit_Enter);
             this.textEdit6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEdit6_KeyUp);
             // 
             // labelControl6
             // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(23, 15);
+            this.labelControl6.Location = new System.Drawing.Point(23, 19);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(143, 28);
+            this.labelControl6.Size = new System.Drawing.Size(84, 20);
             this.labelControl6.TabIndex = 0;
             this.labelControl6.Text = "Phone Num:";
             // 
@@ -395,9 +463,14 @@
             this.panelControl3.Appearance.Options.UseBackColor = true;
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl3.Controls.Add(this.textEdit4);
+            this.panelControl3.Controls.Add(this.textEdit14);
+            this.panelControl3.Controls.Add(this.textEdit13);
+            this.panelControl3.Controls.Add(this.textEdit15);
             this.panelControl3.Controls.Add(this.textEdit3);
             this.panelControl3.Controls.Add(this.textEdit2);
+            this.panelControl3.Controls.Add(this.labelControl14);
             this.panelControl3.Controls.Add(this.textEdit1);
+            this.panelControl3.Controls.Add(this.labelControl13);
             this.panelControl3.Controls.Add(this.labelControl4);
             this.panelControl3.Controls.Add(this.labelControl3);
             this.panelControl3.Controls.Add(this.labelControl2);
@@ -411,7 +484,7 @@
             // textEdit4
             // 
             this.textEdit4.EditValue = "0.00";
-            this.textEdit4.Location = new System.Drawing.Point(169, 111);
+            this.textEdit4.Location = new System.Drawing.Point(752, 73);
             this.textEdit4.Name = "textEdit4";
             this.textEdit4.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.textEdit4.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
@@ -427,7 +500,7 @@
             // textEdit3
             // 
             this.textEdit3.EditValue = "0.00";
-            this.textEdit3.Location = new System.Drawing.Point(169, 80);
+            this.textEdit3.Location = new System.Drawing.Point(482, 18);
             this.textEdit3.Name = "textEdit3";
             this.textEdit3.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.textEdit3.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
@@ -478,7 +551,7 @@
             this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
-            this.labelControl4.Location = new System.Drawing.Point(25, 112);
+            this.labelControl4.Location = new System.Drawing.Point(658, 74);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(32, 16);
             this.labelControl4.TabIndex = 0;
@@ -490,11 +563,11 @@
             this.labelControl3.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Location = new System.Drawing.Point(25, 81);
+            this.labelControl3.Location = new System.Drawing.Point(338, 19);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(74, 16);
+            this.labelControl3.Size = new System.Drawing.Size(52, 16);
             this.labelControl3.TabIndex = 0;
-            this.labelControl3.Text = "Discount %";
+            this.labelControl3.Text = "Member";
             // 
             // labelControl2
             // 
@@ -547,7 +620,7 @@
             this.layoutControl1.Controls.Add(this.simpleButton9);
             this.layoutControl1.Controls.Add(this.simpleButton8);
             this.layoutControl1.Controls.Add(this.customerButton);
-            this.layoutControl1.Controls.Add(this.simpleButton4);
+            this.layoutControl1.Controls.Add(this.simpleButton36);
             this.layoutControl1.Controls.Add(this.removeButton);
             this.layoutControl1.Controls.Add(this.addButton);
             this.layoutControl1.Controls.Add(this.creditButton);
@@ -680,17 +753,19 @@
             this.customerButton.Text = "Customer (F5)";
             this.customerButton.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
-            // simpleButton4
+            // simpleButton36
             // 
-            this.simpleButton4.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
-            this.simpleButton4.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7F, System.Drawing.FontStyle.Bold);
-            this.simpleButton4.Appearance.Options.UseBackColor = true;
-            this.simpleButton4.Appearance.Options.UseFont = true;
-            this.simpleButton4.Location = new System.Drawing.Point(12, 44);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(98, 27);
-            this.simpleButton4.StyleController = this.layoutControl1;
-            this.simpleButton4.TabIndex = 6;
+            this.simpleButton36.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(220)))), ((int)(((byte)(213)))));
+            this.simpleButton36.Appearance.Font = new System.Drawing.Font("Montserrat SemiBold", 7F, System.Drawing.FontStyle.Bold);
+            this.simpleButton36.Appearance.Options.UseBackColor = true;
+            this.simpleButton36.Appearance.Options.UseFont = true;
+            this.simpleButton36.Location = new System.Drawing.Point(12, 44);
+            this.simpleButton36.Name = "simpleButton36";
+            this.simpleButton36.Size = new System.Drawing.Size(98, 27);
+            this.simpleButton36.StyleController = this.layoutControl1;
+            this.simpleButton36.TabIndex = 6;
+            this.simpleButton36.Text = "Discount (F3)";
+            this.simpleButton36.Click += new System.EventHandler(this.simpleButton36_Click);
             // 
             // removeButton
             // 
@@ -992,7 +1067,7 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.simpleButton4;
+            this.layoutControlItem3.Control = this.simpleButton36;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(102, 31);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -1390,20 +1465,91 @@
             this.simpleButton1.Text = "Back";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click_1);
             // 
+            // labelControl13
+            // 
+            this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl13.Appearance.Options.UseFont = true;
+            this.labelControl13.Appearance.Options.UseForeColor = true;
+            this.labelControl13.Location = new System.Drawing.Point(338, 49);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(90, 16);
+            this.labelControl13.TabIndex = 0;
+            this.labelControl13.Text = "Item Discount";
+            // 
+            // textEdit13
+            // 
+            this.textEdit13.EditValue = "0.00";
+            this.textEdit13.Location = new System.Drawing.Point(482, 48);
+            this.textEdit13.Name = "textEdit13";
+            this.textEdit13.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.textEdit13.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit13.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit13.Properties.Appearance.Options.UseFont = true;
+            this.textEdit13.Properties.Appearance.Options.UseTextOptions = true;
+            this.textEdit13.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.textEdit13.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.textEdit13.Properties.ReadOnly = true;
+            this.textEdit13.Size = new System.Drawing.Size(144, 20);
+            this.textEdit13.TabIndex = 1;
+            // 
+            // labelControl14
+            // 
+            this.labelControl14.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl14.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl14.Appearance.Options.UseFont = true;
+            this.labelControl14.Appearance.Options.UseForeColor = true;
+            this.labelControl14.Location = new System.Drawing.Point(338, 77);
+            this.labelControl14.Name = "labelControl14";
+            this.labelControl14.Size = new System.Drawing.Size(54, 16);
+            this.labelControl14.TabIndex = 0;
+            this.labelControl14.Text = "Voucher";
+            // 
+            // textEdit14
+            // 
+            this.textEdit14.EditValue = "0.00";
+            this.textEdit14.Location = new System.Drawing.Point(482, 76);
+            this.textEdit14.Name = "textEdit14";
+            this.textEdit14.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.textEdit14.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit14.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit14.Properties.Appearance.Options.UseFont = true;
+            this.textEdit14.Properties.Appearance.Options.UseTextOptions = true;
+            this.textEdit14.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.textEdit14.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.textEdit14.Properties.ReadOnly = true;
+            this.textEdit14.Size = new System.Drawing.Size(144, 20);
+            this.textEdit14.TabIndex = 1;
+            // 
+            // textEdit15
+            // 
+            this.textEdit15.EditValue = "0.00";
+            this.textEdit15.Location = new System.Drawing.Point(434, 18);
+            this.textEdit15.Name = "textEdit15";
+            this.textEdit15.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.textEdit15.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.textEdit15.Properties.Appearance.Options.UseBackColor = true;
+            this.textEdit15.Properties.Appearance.Options.UseFont = true;
+            this.textEdit15.Properties.Appearance.Options.UseTextOptions = true;
+            this.textEdit15.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.textEdit15.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.textEdit15.Properties.ReadOnly = true;
+            this.textEdit15.Size = new System.Drawing.Size(42, 20);
+            this.textEdit15.TabIndex = 1;
+            // 
             // XtraForm4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 561);
+            this.Controls.Add(this.panelControl6);
             this.Controls.Add(this.gridControl2);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl1);
-            this.Controls.Add(this.panelControl6);
             this.Name = "XtraForm4";
             this.Text = "XtraForm4";
             this.Load += new System.EventHandler(this.XtraForm4_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.XtraForm4_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -1411,6 +1557,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            this.panelControl7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
@@ -1462,6 +1612,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit10.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit15.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1490,7 +1643,7 @@
         private DevExpress.XtraEditors.SimpleButton addButton;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraEditors.SimpleButton customerButton;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.SimpleButton simpleButton36;
         private DevExpress.XtraEditors.SimpleButton removeButton;
         private DevExpress.XtraEditors.SimpleButton creditButton;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
@@ -1561,5 +1714,14 @@
         private DevExpress.XtraEditors.SimpleButton cashButton;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.SimpleButton simpleButton37;
+        private DevExpress.XtraEditors.TextEdit textEdit11;
+        private DevExpress.XtraEditors.LabelControl labelControl11;
+        private DevExpress.XtraEditors.TextEdit textEdit14;
+        private DevExpress.XtraEditors.TextEdit textEdit13;
+        private DevExpress.XtraEditors.LabelControl labelControl14;
+        private DevExpress.XtraEditors.LabelControl labelControl13;
+        private DevExpress.XtraEditors.TextEdit textEdit15;
     }
 }
